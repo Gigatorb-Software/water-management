@@ -1,11 +1,16 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
+import QualityServices from "./QualityServices";
+import CuttingEdge from "./CuttingEdge";
+import Services from "./Services";
 
 const Home = () => {
   return (
-   <Layout>
-    <h1 className=" text-red-300">Home</h1>
-   </Layout>
+    <Layout>
+      <QualityServices />
+      <CuttingEdge />
+      <Services />
+    </Layout>
   );
 };
 
