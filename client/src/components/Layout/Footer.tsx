@@ -3,23 +3,23 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+      <footer className="bg-[#0C111D]">
         <div className="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
               {/* <img src="" className="mr-5 h-6 sm:h-9" alt="logo" /> */}
               <div className="w-full">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_oy9JYKLkepGnTWvTdUV7qGVwNbzvUqE1Bg&s"
+                  src="/logo1.png"
                   alt=""
-                  className=" h-16 object-contain"
+                  className=" w-40  h-16 "
                 />
               </div>
-              <p className="max-w-xs mt-4 text-sm text-gray-600">
+              <p className="max-w-xs mt-4 text-sm text-white">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Voluptas, accusantium.
               </p>
-              <div className="flex mt-8 space-x-6 text-gray-600">
+              <div className="flex mt-8 space-x-6 text-white">
                 <a
                   className="hover:opacity-75"
                   href
@@ -120,8 +120,8 @@ const Footer = () => {
             </div>
             <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium">Company</p>
-                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                <p className="font-medium text-white">Company</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-white">
                   <a className="hover:opacity-75" href>
                     {" "}
                     About{" "}
@@ -141,8 +141,8 @@ const Footer = () => {
                 </nav>
               </div>
               <div>
-                <p className="font-medium">Services</p>
-                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                <p className="font-medium text-white">Services</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-white">
                   
                   <a className="hover:opacity-75" href>
                     {" "}
@@ -163,8 +163,8 @@ const Footer = () => {
                 </nav>
               </div>
               <div>
-                <p className="font-medium">Helpful Links</p>
-                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                <p className="font-medium text-white">Helpful Links</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-white">
                   <a className="hover:opacity-75" href>
                     {" "}
                     Contact{" "}
@@ -180,8 +180,8 @@ const Footer = () => {
                 </nav>
               </div>
               <div>
-                <p className="font-medium">Legal</p>
-                <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                <p className="font-medium text-white">Legal</p>
+                <nav className="flex flex-col mt-4 space-y-2 text-sm text-white">
                   <a className="hover:opacity-75" href>
                     {" "}
                     Privacy Policy{" "}
@@ -202,7 +202,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <p className="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
+          <p className="mt-8 text-xs text-white">© 2022 Comany Name</p>
         </div>
       </footer>
     </div>

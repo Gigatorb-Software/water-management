@@ -4,12 +4,13 @@ import QualityServices from "./QualityServices";
 import CuttingEdge from "./CuttingEdge";
 import Services from "./Services";
 
+
 const Home = () => {
   return (
     <Layout>
-      <QualityServices />
-      <CuttingEdge />
-      <Services />
+      {/* <QualityServices /> */}
+      {/* <CuttingEdge /> */}
+      {/* <Services /> */}
     </Layout>
   );
 };

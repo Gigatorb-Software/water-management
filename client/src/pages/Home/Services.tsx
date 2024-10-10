@@ -4,7 +4,7 @@ const Services = () => {
   return (
     <div className="container mx-auto py-6 ">
       <div className="border shadow-md mx-8 py-6">
-        <p className="text-5xl text-center font-serif font-medium">Service</p>
+        <p className="text-5xl text-center text-cyan-600 font-serif font-medium">Services</p>
         <div className="flex flex-wrap gap-6 justify-center md:justify-evenly py-6 items-center">
           <div className="text-center min-w-[150px]">
             <img
