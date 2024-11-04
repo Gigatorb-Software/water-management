@@ -1,10 +1,12 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const Signup = () => {
+  const navigate = useNavigate()
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -25,21 +27,35 @@ const Signup = () => {
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+    address: Yup.string().required('Address is required'),
   });
 
   // Handle form submission
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    // Here, you can handle the form data, e.g., send it to your backend
-    console.log('Form data', values);
-    // Simulate a server response delay
-    setTimeout(() => {
-      setSubmitting(false);
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      // Sending form data to the API
+      const response = await axios.post('http://localhost:8000/api/signup', {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        address: values.address,
+        phoneNumber: values.phone,
+        password: values.password,
+      });
+
+      console.log('Response:', response.data);
+     if(response.data.success === true){
+      navigate('/login')
+     }
+      
+      // Reset the form after successful signup
       resetForm();
-      // Optionally, redirect the user or show a success message
-    }, 1000);
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('Signup failed, please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -52,14 +68,6 @@ const Signup = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center px-4 py-6 mx-auto min-h-screen">
-        {/* <Link to="/" className="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-          <img
-            className="w-6 h-6 mr-1"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
-          Aqua-Fresh
-        </Link> */}
         <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-xs xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-4 space-y-3 sm:p-4">
             <h1 className="text-bold text-xl text-gray-900 dark:text-white mb-4 " style={{ fontSize: 22 }}>
@@ -72,7 +80,7 @@ const Signup = () => {
                 email: '',
                 phone: '',
                 password: '',
-                confirmPassword: '',
+                address: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
@@ -88,14 +96,9 @@ const Signup = () => {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="firstName">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="firstName" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
                   {/* Last Name */}
@@ -107,14 +110,9 @@ const Signup = () => {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="lastName">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="lastName" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
                   {/* Email */}
@@ -126,14 +124,9 @@ const Signup = () => {
                       type="email"
                       name="email"
                       id="email"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="email">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="email" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
                   {/* Phone Number */}
@@ -145,14 +138,9 @@ const Signup = () => {
                       type="tel"
                       name="phone"
                       id="phone"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="phone">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="phone" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
                   {/* Password */}
@@ -164,41 +152,30 @@ const Signup = () => {
                       type="password"
                       name="password"
                       id="password"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="password">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="password" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
-                  {/* Confirm Password */}
+                  {/* Address */}
                   <div>
-                    <label htmlFor="confirmPassword" className="block mb-1 text-xs font-medium text-gray-900 dark:text-white">
-                      Confirm Password
+                    <label htmlFor="address" className="block mb-1 text-xs font-medium text-gray-900 dark:text-white">
+                      Address
                     </label>
                     <Field
-                      type="password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      placeholder=""
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 
-                      dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      type="text"
+                      name="address"
+                      id="address"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
-                    <ErrorMessage name="confirmPassword">
-                      {(msg) => <div className="text-red-500 text-xs mt-0.5">{msg}</div>}
-                    </ErrorMessage>
+                    <ErrorMessage name="address" component="div" className="text-red-500 text-xs mt-0.5" />
                   </div>
 
                   {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-300 
-                    font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+                    className="w-full text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-300 font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
                   >
                     {isSubmitting ? 'Registering...' : 'Register'}
                   </button>

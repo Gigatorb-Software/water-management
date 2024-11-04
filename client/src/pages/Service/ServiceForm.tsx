@@ -111,7 +111,7 @@ const ServiceForm: React.FC = () => {
                         <Typography variant="body1" sx={{ mt: 1, color: '#00ACC1' }}>
                             For Our Services{' '}
                             <Link href="#" underline="hover" sx={{ color: '#3182ce' }}>
-                                
+
                             </Link>
                         </Typography>
                     </Box>
@@ -218,7 +218,7 @@ const ServiceForm: React.FC = () => {
                                 <Grid item xs={12} sm={6}>
                                     <FormControl fullWidth size="small">
                                         <InputLabel sx={{ fontSize: 12 }} id="category-label">
-                                            Select Category
+                                            Purifier You Own
                                         </InputLabel>
                                         <Select
                                             labelId="category-label"
@@ -381,7 +381,7 @@ const ServiceForm: React.FC = () => {
                             {/* Service Type */}
                             <FormControl fullWidth size="small">
                                 <InputLabel sx={{ fontSize: 12 }} id="serviceType-label">
-                                    Service Type
+                                    Selected Service
                                 </InputLabel>
                                 <Select
                                     labelId="serviceType-label"
@@ -409,9 +409,24 @@ const ServiceForm: React.FC = () => {
                             </FormControl>
 
                             {/* Submit Button */}
-                            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{
+                                    mt: 1,
+                                    backgroundColor: '#0891b2', // cyan-600 hex value
+                                    color: 'white', // text color white
+                                    '&:hover': {
+                                        backgroundColor: 'white', // hover bg color white
+                                        color: '#0891b2', // text color on hover (cyan-600)
+                                        border: '1px solid #0891b2', // border color on hover
+                                    },
+                                }}
+                            >
                                 Submit
                             </Button>
+
+
                         </Box>
                     </form>
                 </Box>

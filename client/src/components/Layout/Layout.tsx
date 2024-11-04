@@ -13,7 +13,7 @@ const Layout = ({ children }: any) => {
     <>
       <Header />
       
-      <CarouselComponent/>
+      {/* <CarouselComponent/>
       
       
       <Card/>
@@ -21,7 +21,7 @@ const Layout = ({ children }: any) => {
       <BlogCard/>
       <QualityServices/>
       <Services />
-      <ContactUsForm/>
+      <ContactUsForm/> */}
       {children}
       <Footer />
     </>
