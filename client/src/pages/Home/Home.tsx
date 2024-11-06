@@ -4,9 +4,9 @@ import QualityServices from "./QualityServices";
 import CuttingEdge from "./CuttingEdge";
 import Services from "./Services";
 import CarouselComponent from "../../components/Layout/Carousel";
-import Card from "../../components/Layout/Card";
 import BlogCard from "../../components/Layout/BlogCard";
 import ContactUsForm from "./Contact";
+import Products from "../../components/Layout/Card";
 
 
 const Home = () => {
@@ -18,9 +18,9 @@ const Home = () => {
       <CarouselComponent/>
       
       
-      <Card/>
+      <Products/>
       
-      <BlogCard/>
+       <BlogCard/>
       <QualityServices/>
       <Services />
       <ContactUsForm/>

@@ -1,8 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const Login = () => {
   // Initialize useNavigate
@@ -13,49 +12,36 @@ const Login = () => {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    password: Yup.string()
+      .required("Password is required"), 
   });
 
   // Initialize Formik
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      // remember: false,
+      email: '',
+      password: '',
+      remember: false,
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      console.log("Form data", values);
-      try {
-        const response = await axios.post("http://localhost:8000/api/login", {
-          email: values.email,
-          password: values.password,
-        },{headers: {
-          "Content-Type": "application/json"
-      }, withCredentials: true,});
-
-        console.log("Response:", response.data);
-        if (response.data.success === true) {
-          // navigate("/serviceform");
-          navigate('/')
-        }
-      } catch (error) {
-        console.log(error)
-      }
-
+    onSubmit: (values) => {
+      // Handle form submission
+      console.log('Form data', values);
+      // You can integrate your login logic here
+      
       // Redirect to ServiceForm after successful login
-      // navigate("/serviceform");
+      // navigate('/serviceform');
     },
   });
 
   return (
-    <section
+    <section 
       className="min-h-screen flex items-center justify-center"
-      style={{
-        backgroundImage: `url("https://html.ditsolution.net/drtheme/dreamhub/purify/assets/images/slider/hero-bg.jpg")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+      style={{ 
+        backgroundImage: `url("https://html.ditsolution.net/drtheme/dreamhub/purify/assets/images/slider/hero-bg.jpg")`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <div className="w-96 h-auto max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -64,21 +50,13 @@ const Login = () => {
             <img className="w-6 h-6 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
             Aqua-Fresh    
           </Link> */}
-          <h1
-            className="text-bold text-xl text-gray-900 dark:text-white mb-4 "
-            style={{ fontSize: 22 }}
-          >
+          <h1 className="text-bold text-xl text-gray-900 dark:text-white mb-4 " style={{ fontSize: 22 }}>
             Sign In
           </h1>
           <form onSubmit={formik.handleSubmit} className="space-y-3">
             {/* Email Field */}
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Email
-              </label>
+              <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Email</label>
               <input
                 type="email"
                 name="email"
@@ -87,27 +65,18 @@ const Login = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
                 className={`bg-gray-50 border ${
-                  formik.touched.email && formik.errors.email
-                    ? "border-red-500"
-                    : "border-gray-300"
+                  formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'
                 } text-gray-900 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
                 placeholder=""
               />
               {formik.touched.email && formik.errors.email ? (
-                <p className="mt-1 text-xs text-red-600">
-                  {formik.errors.email}
-                </p>
+                <p className="mt-1 text-xs text-red-600">{formik.errors.email}</p>
               ) : null}
             </div>
 
             {/* Password Field */}
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Password
-              </label>
+              <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Password</label>
               <input
                 type="password"
                 name="password"
@@ -117,15 +86,11 @@ const Login = () => {
                 value={formik.values.password}
                 placeholder=""
                 className={`bg-gray-50 border ${
-                  formik.touched.password && formik.errors.password
-                    ? "border-red-500"
-                    : "border-gray-300"
+                  formik.touched.password && formik.errors.password ? 'border-red-500' : 'border-gray-300'
                 } text-gray-900 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
               />
               {formik.touched.password && formik.errors.password ? (
-                <p className="mt-1 text-xs text-red-600">
-                  {formik.errors.password}
-                </p>
+                <p className="mt-1 text-xs text-red-600">{formik.errors.password}</p>
               ) : null}
             </div>
 
@@ -140,17 +105,9 @@ const Login = () => {
                   checked={formik.values.remember}
                   className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600"
                 />
-                <label
-                  htmlFor="remember"
-                  className="ml-2 text-xs text-gray-600 dark:text-gray-300"
-                >
-                  Remember me
-                </label>
+                <label htmlFor="remember" className="ml-2 text-xs text-gray-600 dark:text-gray-300">Remember me</label>
               </div>
-              <Link
-                to="/forgot-password"
-                className="text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"
-              >
+              <Link to="/forgot-password" className="text-xs font-medium text-primary-600 hover:underline dark:text-primary-500">
                 Forgot password?
               </Link>
             </div>
@@ -165,9 +122,9 @@ const Login = () => {
 
             {/* Sign Up Link */}
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-              Don’t have an account yet?{" "}
+              Don’t have an account yet?{' '}
               <Link
-                to="/signup"
+                to="/sign-up-user"
                 className="text-pink-700 font-semibold text-xs"
               >
                 Sign-up
@@ -178,6 +135,6 @@ const Login = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Login;

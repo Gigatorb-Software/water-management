@@ -1,49 +1,87 @@
-import React from "react";
+import React from 'react';
+import { Container, Grid, Card, CardContent, Typography, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const Services = () => {
+type Service = {
+  title: string;
+  description: string;
+  image: string;
+};
+
+const services: Service[] = [
+  {
+    title: "Installation",
+    description: "Our technicians are factory trained to install water purifiers for effective functioning.",
+    image: "AuroInstallation.webp",
+  },
+  {
+    title: "Maintenance",
+    description: "We are the best when it comes to providing maintenance to water purifiers for safe and smooth run.",
+    image: "AuroMaintenance.webp",
+  },
+  {
+    title: "Reparation",
+    description: "We are the best when it comes to repair and provide hassle-free service for water purifiers.",
+    image: "AuorRepair.webp",
+  },
+  {
+    title: "Exchange",
+    description: "We provide best exchange offers on our quality water purifiers of leading brands at best prices.",
+    image: "AuroExchange.jpg",
+  },
+];
+
+const Services: React.FC = () => {
+
+  const navigate = useNavigate();
+  
   return (
-    <div className="container mx-auto py-6 ">
-      <div className="border shadow-md mx-8 py-6">
-        <p className="text-5xl text-center text-cyan-600 font-serif font-medium">Services</p>
-        <div className="flex flex-wrap gap-6 justify-center md:justify-evenly py-6 items-center">
-          <div className="text-center min-w-[150px]">
-            <img
-              src="https://www.pureitwater.com/media/wysiwyg/Book-a-Demo_1.png"
-              alt=""
-              className="w-28 mx-auto"
-            />
-            <p className="py-2 font-semibold">Book A Demo</p>
-          </div>
-
-          <div className="text-center min-w-[150px]">
-            <img
-              src="https://www.pureitwater.com/media/wysiwyg/Order-GKK_2.png"
-              alt=""
-              className="w-28 mx-auto"
-            />
-            <p className="py-2 font-semibold">Order Germ Kill Kit</p>
-          </div>
-
-          <div className="text-center min-w-[150px]">
-            <img
-              src="https://www.pureitwater.com/media/wysiwyg/Extended-Warranty.png"
-              alt=""
-              className="w-28 mx-auto"
-            />
-            <p className="py-2 font-semibold">Extended Warranty</p>
-          </div>
-
-          <div className="text-center min-w-[150px]">
-            <img
-              src="https://www.pureitwater.com/media/wysiwyg/optimized/Maintenance-Contract.png"
-              alt=""
-              className="w-28 mx-auto"
-            />
-            <p className="py-2 font-semibold">Services Support</p>
-          </div>
-        </div>
-      </div>
+    <div className='mx-auto my-16'>
+      <Container>
+      <Typography variant="h4" sx={{ color: '#00acc1', fontWeight: 700, marginBottom: '24px', textAlign: 'center' }} className='font-serif font-medium'>
+        Services
+      </Typography>
+      <Grid container spacing={4}>
+        {services.map((service, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card>
+              <img
+                src={service.image}
+                alt={service.title}
+                style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px 8px 0 0' }}
+              />
+              <CardContent>
+                <Typography variant="h6" align="center" gutterBottom>
+                  {service.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" align="center" paragraph>
+                  {service.description}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  // style={{ marginTop: '10px', backgroundColor: '#0891b2' }}
+                  sx={{
+                    mt: 1, // margin-top in MUI shorthand
+                    backgroundColor: '#0891b2',
+                    '&:hover': {
+                      backgroundColor: '#06b6d4',
+                    },
+                  }}
+                  onClick={() => navigate('/serviceform')}
+                  
+                >
+                  Enquire Now
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
     </div>
+    
   );
 };
 
