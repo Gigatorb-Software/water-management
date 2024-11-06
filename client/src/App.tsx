@@ -14,6 +14,9 @@ import Services from "./pages/Home/Services";
 import ContactUsForm from "./pages/Home/Contact";
 import ProtectedRouteToken from "./routes/ProtectedRouteToken";
 import Layout from "./components/Layout/Layout";
+import AdminLayout from "./pages/adminView/AdminLayout";
+import AdminDashboard from "./pages/adminView/AdminDashboard";
+import AddProduct from "./pages/adminView/AddProduct";
 
 function App() {
   return (
@@ -50,6 +53,12 @@ function App() {
           }/>
         </Route>
          
+         {/* admin route  */}
+         <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="addproduct" element={<AddProduct />} />
+          <Route path="editproduct/:id" element={<AddProduct />} /> 
+        </Route>
        
 
        
