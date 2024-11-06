@@ -22,7 +22,14 @@ app.use(
   }),
 );
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_ORIGIN || "*", 
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use("/api", userRoutes);
 app.use('/pub', publicRoutes);
