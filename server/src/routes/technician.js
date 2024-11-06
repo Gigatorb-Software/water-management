@@ -10,6 +10,7 @@ const router = express.Router();
 // = ===============================
 
 router.post("/technicianRegister", technicianController.registerTechnician);
+router.get("/getAllRegister", technicianController.getAllTechnicians);
 
 
 module.exports = router;

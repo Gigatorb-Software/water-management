@@ -46,3 +46,31 @@ export const registerTechnician = async (req, res) => {
     });
   }
 };
+
+export const getAllTechnicians = async (req, res) => {
+  try {
+    // Fetch all technicians from the Technicians table
+    const technicians = await Technician.findAll({
+      attributes: [
+        "id",
+        "firstName",
+        "lastName",
+        "phone",
+        "email",  
+      ],
+      order: [["createdAt", "DESC"]], // Order by creation date, latest first
+    });
+
+    // Respond with success and the list of technicians
+    return res.status(200).json({
+      message: "List of all technicians",
+      data: technicians,
+    });
+  } catch (error) {
+    console.error("Error fetching technicians:", error);
+    return res.status(500).json({
+      message: "Error fetching technicians",
+      error: error.message,
+    });
+  }
+};
