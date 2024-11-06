@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     // Associations
     Service.belongsTo(models.User, {
       foreignKey: "customerId",
-      as: "customer",
+     
     });
     Service.belongsTo(models.Technician, {
       foreignKey: "technicianId",

@@ -1,5 +1,5 @@
 // controllers/serviceController.js
-import { Service } from "../models";
+import { Service, User, Address } from "../models";
 
 export const createService = async (req, res) => {
   try {
@@ -36,3 +36,38 @@ export const createService = async (req, res) => {
     });
   }
 };
+
+export const getAllServices = async (req, res) => {
+  try {
+    // Fetch all service bookings, including related data if needed (e.g., User, Product, Technician)
+    const services = await Service.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["firstName", "lastName", "email"],
+          include: [
+            {
+              model: Address,
+              as: "address",
+              attributes: ["street", "city", "state", "postalCode", "country"],
+            },
+          ],
+        },
+      ],
+      order: [["createdAt", "DESC"]], // Sort by creation date (latest first)
+    });
+
+    // Respond with success and the list of services
+    return res.status(200).json({
+      message: "List of all service bookings",
+      data: services,
+    });
+  } catch (error) {
+    console.error("Error fetching service bookings:", error);
+    return res.status(500).json({
+      message: "Error fetching service bookings",
+      error: error.message,
+    });
+  }
+};
+

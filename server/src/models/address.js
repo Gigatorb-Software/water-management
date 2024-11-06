@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
-      paranoid: true, // enables soft delete with deletedAt timestamp
     }
   );
 

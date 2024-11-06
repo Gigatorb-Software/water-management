@@ -10,5 +10,6 @@ const router = express.Router();
 // = ===============================
 
 router.post("/createService", serviceController.createService);
+router.get("/getAllService", serviceController.getAllServices);
 
 module.exports = router;
