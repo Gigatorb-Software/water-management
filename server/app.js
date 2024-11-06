@@ -11,6 +11,8 @@ import apiMiddleware from "./src/middleware/apiAuth";
 import adminMiddleware from "./src/middleware/adminAuth";
 import errorHandler from "./src/middleware/errorHandler";
 import userRoutes from "./src/routes/user";
+import technicianRoutes from "./src/routes/technician";
+import serviceRoutes from "./src/routes/service";
 
 dotenv.config();
 require("./src/config/sequelize");
@@ -40,6 +42,8 @@ app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(bodyParser.json());
 app.use("/api", userRoutes);
+app.use("/api", technicianRoutes);
+app.use("/api", serviceRoutes);
 app.use("/pub", publicRoutes);
 // app.use('/api', apiMiddleware, apiRoutes);
 // app.use('/api/admin', apiMiddleware, adminMiddleware, adminRoutes);
