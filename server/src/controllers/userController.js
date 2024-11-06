@@ -135,3 +135,45 @@ export const login = async (req, res) => {
       .json({ message: "Server error", error: error.message });
   }
 };
+
+export const getUserById = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Fetch the user by ID, including the role and address associations
+    const user = await User.findOne({
+      where: { id: userId },
+      include: [
+        {
+          model: Role,
+          as: "role",
+          attributes: ["id", "role"], // adjust fields as needed
+        },
+        {
+          model: Address,
+          as: "address",
+          attributes: ["street", "city", "state", "postalCode", "country"], // adjust fields as needed
+        },
+      ],
+    });
+
+    // Check if user was found
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Respond with user details
+    return res.status(200).json({
+      message: "User details",
+      data: user,
+    });
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    return res.status(500).json({
+      message: "Error fetching user details",
+      error: error.message,
+    });
+  }
+};
