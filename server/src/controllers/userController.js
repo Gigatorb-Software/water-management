@@ -93,7 +93,6 @@ export const register = async (req, res) => {
   }
 };
 
-
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -127,6 +126,7 @@ export const login = async (req, res) => {
     return res.status(200).json({
       message: "Login successful",
       token, // Send the token back in the response
+      user,
     });
   } catch (error) {
     console.error(error);
