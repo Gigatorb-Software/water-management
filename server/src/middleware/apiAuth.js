@@ -1,21 +1,43 @@
-// middleware/authenticate.js
 import jwt from "jsonwebtoken";
 
-// Secret key for JWT verification (same as used during token creation)
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "your_secret_key";
+// Ensure SECRET is available in environment variables
+const JWT_SECRET_KEY = process.env.SECRET;
 
-export const authenticate = (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
+// Authentication Middleware
+export const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  // Check if the Authorization header is present and formatted correctly
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res
+      .status(401)
+      .json({ message: "Access token missing" });
   }
 
+  const token = authHeader.split(" ")[1];
+
+  // Debugging: Log the token only if needed (avoid this in production)
+  console.log("Received Token:", token);
+
   try {
-    const decoded = jwt.verify(token, JWT_SECRET_KEY); // Decode the token
-    req.user = decoded; // Attach the decoded user data to the request object
-    next(); // Proceed to the next middleware or route handler
+    // Verify the JWT token with the same secret and algorithm used for signing
+    const decoded = jwt.verify(token, JWT_SECRET_KEY, {
+      algorithms: ["HS256"],
+    });
+
+    // Attach decoded user data to the request object
+    req.user = decoded;
+
+    // Proceed to the next middleware or route handler
+    next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token" });
+    // Handle specific JWT errors
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Token has expired" });
+    }
+
+    // Handle invalid or other errors
+    return res.status(401).json({ message: "Invalid or expired access token" });
   }
 };

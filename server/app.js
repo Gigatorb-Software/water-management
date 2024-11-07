@@ -6,8 +6,7 @@ import cors from "cors";
 
 import publicRoutes from "./src/routes/public";
 import apiRoutes from "./src/routes/api";
-import adminRoutes from "./src/routes/admin.js";
-import apiMiddleware from "./src/middleware/apiAuth";
+import adminRoutes from "./src/routes/admin";
 import adminMiddleware from "./src/middleware/adminAuth";
 import errorHandler from "./src/middleware/errorHandler";
 import userRoutes from "./src/routes/user";

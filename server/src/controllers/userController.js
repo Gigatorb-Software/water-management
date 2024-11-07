@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 
-const JWT_SECRET_KEY = process.env.SECRET || "your_secret_key";
+const JWT_SECRET_KEY = process.env.SECRET;
 
 export const register = async (req, res) => {
   // Validate request
@@ -119,7 +119,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { userId: user.id, email: user.email, roleId: user.roleId }, // Payload (user data to be encoded in JWT)
       JWT_SECRET_KEY, // Secret key for signing the token
-      { expiresIn: "1h" } // Expiration time for the token
+      { expiresIn: "1h", algorithm: "HS256" } // Expiration time for the token
     );
 
     // Return the token to the client
