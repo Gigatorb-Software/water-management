@@ -172,11 +172,8 @@ const ServiceForm: React.FC = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundImage: "url(/WaterBackground.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        position: "relative",
-        py: { xs: 4, sm: 8, lg: 12 }, // Responsive padding
+        backgroundColor: "#f0f9ff",
+        paddingY: "3rem",
       }}
     >
       {/* Overlay */}
@@ -188,7 +185,7 @@ const ServiceForm: React.FC = () => {
       ></Box>
 
       {/* Form Container */}
-      <Container maxWidth="sm" sx={{ position: "relative", zIndex: 1 }}>
+      <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
         <Box
           sx={{
             backgroundColor: "white",
@@ -198,15 +195,12 @@ const ServiceForm: React.FC = () => {
           }}
         >
           {/* Header */}
-          <Box sx={{ textAlign: "center", mb: 2 }}>
+          <Box sx={{ textAlign: "center", mb: 6 }}>
             <Typography
-              variant="h4"
+              variant="h5"
               component="h2"
-              sx={{ fontWeight: "bold", color: "#1a202c" }}
+              sx={{ mt: 1, color: "#00ACC1" }}
             >
-              Submit Your Account
-            </Typography>
-            <Typography variant="body1" sx={{ mt: 1, color: "#00ACC1" }}>
               For Our Services{" "}
               <Link href="#" underline="hover" sx={{ color: "#3182ce" }}></Link>
             </Typography>
@@ -214,7 +208,7 @@ const ServiceForm: React.FC = () => {
 
           {/* Form */}
           {/* <form onSubmit={formik.handleSubmit}> */}
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit} className="mt-4">
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {/* Full Name */}
               <Grid container spacing={2}>
@@ -513,22 +507,31 @@ const ServiceForm: React.FC = () => {
               </FormControl>
 
               {/* Submit Button */}
-              <Button
-                type="submit"
-                variant="contained"
+              <Box
                 sx={{
-                  mt: 1,
-                  backgroundColor: "#0891b2", // cyan-600 hex value
-                  color: "white", // text color white
-                  "&:hover": {
-                    backgroundColor: "white", // hover bg color white
-                    color: "#0891b2", // text color on hover (cyan-600)
-                    border: "1px solid #0891b2", // border color on hover
-                  },
+                  display: "flex",
+                  justifyContent: "center", // Aligns content to the right
+                  marginTop: "1rem",
                 }}
               >
-                Submit
-              </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    mt: 1,
+                    width: "20rem",
+                    backgroundColor: "#0891b2", // cyan-600 hex value
+                    color: "white", // text color white
+                    "&:hover": {
+                      backgroundColor: "white", // hover bg color white
+                      color: "#0891b2", // text color on hover (cyan-600)
+                      border: "1px solid #0891b2", // border color on hover
+                    },
+                  }}
+                >
+                  Submit
+                </Button>
+              </Box>
             </Box>
           </form>
         </Box>
