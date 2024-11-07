@@ -10,8 +10,8 @@ const router = express.Router();
 // API routes
 // = ===============================
 
-router.post("/technicianRegister", authenticateToken,technicianController.registerTechnician);
-router.get("/getAllRegister",authenticateToken, technicianController.getAllTechnicians);
+router.post("/technicianRegister", technicianController.registerTechnician);
+router.get("/getAllRegister", technicianController.getAllTechnicians);
 
 
 module.exports = router;

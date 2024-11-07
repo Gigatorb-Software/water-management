@@ -14,12 +14,12 @@ const adminSidebarMenuItems = [
     path: "/admin/addproduct",
     icon: <FaBoxOpen />,
   },
-  {
-    id: "orders",
-    label: "Orders",
-    // path: "/admin/orders",
-    icon: <FaCheckCircle />,
-  },
+  // {
+  //   id: "orders",
+  //   label: "Orders",
+  //   // path: "/admin/orders",
+  //   icon: <FaCheckCircle />,
+  // },
   {
     id: "services",
     label: "Services",

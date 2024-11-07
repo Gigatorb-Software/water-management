@@ -1,181 +1,154 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  MaterialReactTable,
-  MRT_ColumnDef,
-  useMaterialReactTable,
-} from "material-react-table";
-import { Select, MenuItem, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-// Example product data type
-type Product = {
-  srno: string;
-  customer: string;
+
+import { useEffect, useState } from "react";
+import { Select, MenuItem, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { apiGetAllServices } from "../../services/AdminAPIs/AdminServices";
+import { apiGetAllTechnician } from "../../services/AdminAPIs/Technician"; // Assuming this is the API for technicians
+
+type Service = {
+  id: string;
+  customerName: string;
   serviceType: string;
   bookingDate: string;
   scheduleDate: string;
   technician: string;
-  status: string;
+  serviceStatus: string;
 };
 
 const AdminService = () => {
   const navigate = useNavigate();
+  const [services, setServices] = useState<Service[]>([]);
+  const [technicians, setTechnicians] = useState<string[]>([]);
 
-
-  const fetchProducts = async () => {
+  const fetchServices = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/admin/products",
-        {
-          withCredentials: true, // Send the cookie along with the request
-        }
-      );
-      console.log("response", response);
-      setProducts(response.data);
+      const response = await apiGetAllServices();
+      const transformedServices = response.data.data.map((service: any) => ({
+        ...service,
+        customerName: `${service.User.firstName} ${service.User.lastName}`,
+        bookingDate: new Date(service.bookingDate).toLocaleDateString("en-GB"),
+      }));
+
+      setServices(transformedServices);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching services:", error);
     }
   };
+
+  const fetchTechnicians = async () => {
+    try {
+      const response = await apiGetAllTechnician();
+      const technicianNames = response.data.data.map(
+        (tech: { firstName: string; lastName: string }) => `${tech.firstName} ${tech.lastName}`
+      );
+      setTechnicians(technicianNames);
+    } catch (error) {
+      console.error("Error fetching technicians:", error);
+    }
+  };
+
   useEffect(() => {
-    fetchProducts();
+    fetchServices();
+    fetchTechnicians();
   }, []);
-  // Static product data with initial values
-  const [products, setProducts] = useState<Product[]>([
-    { srno: "1", customer: "Ravi Sharma", serviceType: "Maintenance", bookingDate: "2023-11-01", scheduleDate: "2023-11-05", technician: "James", status: "Pending" },
-    { srno: "2", customer: "Nitin Chaddha", serviceType: "Installation", bookingDate: "2023-11-02", scheduleDate: "2023-11-06", technician: "Rohit", status: "Confirmed" },
-    { srno: "3", customer: "Amar Singh", serviceType: "Maintenance", bookingDate: "2023-11-03", scheduleDate: "2023-11-07", technician: "Raghav", status: "Cancelled" },
-    { srno: "4", customer: "Kirti Shukla", serviceType: "Installation", bookingDate: "2023-11-04", scheduleDate: "2023-11-08", technician: "Amit", status: "Pending" },
-    { srno: "5", customer: "Payal Tyagi", serviceType: "Maintenance", bookingDate: "2023-11-05", scheduleDate: "2023-11-09", technician: "Neelesh", status: "Confirmed" },
-    // Add more rows as needed
-  ]);
 
-  // Dropdown options
-  const serviceTypes = ["Maintenance", "Installation", "Repair"];
-  const technicians = ["James", "Rohit", "Raghav", "Amit", "Neelesh"];
-  const statuses = ["Pending", "Confirmed", "Cancelled"];
-
-  // Approve button handler to update the status to "Confirmed"
-  const handleApprove = (srno: string) => {
-    setProducts((prev) =>
-      prev.map((product) =>
-        product.srno === srno ? { ...product, status: "Confirmed" } : product
+  const handleTechnicianChange = (id: string, newTechnician: string) => {
+    setServices((prev) =>
+      prev.map((service) =>
+        service.id === id ? { ...service, technician: newTechnician } : service
       )
     );
   };
 
-  // Columns for the table
-  const columns = useMemo<MRT_ColumnDef<Product>[]>(() => [
-    { accessorKey: "srno", header: "Sr.No", size: 20 },
-    { accessorKey: "customer", header: "Customer Name", size: 200 },
-    {
-      accessorKey: "serviceType",
-      header: "Service Type",
-      size: 200,
-      Cell: ({ cell }) => (
-        <Select
-          value={cell.getValue<string>()}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            setProducts((prev) =>
-              prev.map((product) =>
-                product.srno === cell.row.original.srno
-                  ? { ...product, serviceType: newValue }
-                  : product
-              )
-            );
-          }}
-          sx={{ width: 120 }}
-        >
-          {serviceTypes.map((type) => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </Select>
-      ),
-    },
-    { accessorKey: "bookingDate", header: "Booking Date", size: 200 },
-    { accessorKey: "scheduleDate", header: "Schedule Date", size: 100 },
-    {
-      accessorKey: "technician",
-      header: "Technician",
-      size: 100,
-      Cell: ({ cell }) => (
-        <Select
-          value={cell.getValue<string>()}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            setProducts((prev) =>
-              prev.map((product) =>
-                product.srno === cell.row.original.srno
-                  ? { ...product, technician: newValue }
-                  : product
-              )
-            );
-          }}
-          sx={{ width: 120 }}
-        >
-          {technicians.map((tech) => (
-            <MenuItem key={tech} value={tech}>
-              {tech}
-            </MenuItem>
-          ))}
-        </Select>
-      ),
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-      size: 100,
-      Cell: ({ cell }) => (
-        <Select
-          value={cell.getValue<string>()}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            setProducts((prev) =>
-              prev.map((product) =>
-                product.srno === cell.row.original.srno
-                  ? { ...product, status: newValue }
-                  : product
-              )
-            );
-          }}
-          sx={{ width: 120 }}
-        >
-          {statuses.map((status) => (
-            <MenuItem key={status} value={status}>
-              {status}
-            </MenuItem>
-          ))}
-        </Select>
-      ),
-    },
-    {
-      accessorKey: "actions",
-      header: "Action",
-      size: 150,
-      Cell: ({ row }) => (
-        <Button
-          variant="contained"
-          
-          onClick={() => handleApprove(row.original.srno)}
-          disabled={row.original.status === "Confirmed"}
-          className="!bg-cyan-600 !hover:bg-cyan-500 text-white rounded px-4 py-2"
-        >
-          Approve
-        </Button>
-      ),
-    },
-  ], []);
+  const handleScheduleDateChange = (id: string, newDate: string) => {
+    setServices((prev) =>
+      prev.map((service) =>
+        service.id === id ? { ...service, scheduleDate: newDate } : service
+      )
+    );
+  };
 
-  const table = useMaterialReactTable({
-    columns,
-    data: products,
-    enableExpanding: true,
-    //note: performance of this example should be improved with hash maps. This is currently 0(n^2)
-    //  getSubRows: (row) => data.filter((r) => r.managerId === row.id),
-  });
-  return <MaterialReactTable table={table} />;
+  const handleApprove = (id: string) => {
+    setServices((prev) =>
+      prev.map((service) =>
+        service.id === id ? { ...service, status: "Confirmed" } : service
+      )
+    );
+  };
+
+  return (
+    <>
+
+
+    
+<TableContainer component={Paper} className="my-4">
+  <Typography variant="h5" component="h2" sx={{ fontWeight: '600', mb: 2, textAlign: 'center' }} className="text-xl text-[#0891b2] font-semibold mb-4">
+      Service List
+    </Typography>
+      <Table sx={{ minWidth: 650 }} aria-label="admin service table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: '600' }}>ID</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Customer Name</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Service Type</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Booking Date</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Schedule Date</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Technician</TableCell>
+            <TableCell align="left" sx={{ fontWeight: '600' }}>Status</TableCell>
+            <TableCell align="center" sx={{ fontWeight: '600' }}>Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {services.map((service) => (
+            <TableRow key={service.id}>
+              <TableCell>{service.id}</TableCell>
+              <TableCell>{service.customerName}</TableCell>
+              <TableCell>{service.serviceType}</TableCell>
+              <TableCell>{service.bookingDate}</TableCell>
+              <TableCell>
+                <TextField
+                  type="date"
+                  value={service.scheduleDate || ""}
+                  onChange={(e) => handleScheduleDateChange(service.id, e.target.value)}
+                  sx={{ width: 150 }}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </TableCell>
+              <TableCell>
+                <Select
+                  value={service.technician || ""}
+                  onChange={(e) => handleTechnicianChange(service.id, e.target.value)}
+                  sx={{ width: 150 }}
+                  displayEmpty
+                >
+                  <MenuItem value="" disabled>Select Technician</MenuItem>
+                  {technicians.map((tech) => (
+                    <MenuItem key={tech} value={tech}>
+                      {tech}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </TableCell>
+              <TableCell>{service.serviceStatus}</TableCell>
+              <TableCell align="center">
+                <Button
+                  variant="contained"
+                  onClick={() => handleApprove(service.id)}
+                  disabled={service.serviceStatus === "Confirmed"}
+                  className="!bg-cyan-600 !hover:bg-cyan-500 text-white rounded px-4 py-2"
+                >
+                  Approve
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </>
+   
+  );
 };
 
 export default AdminService;

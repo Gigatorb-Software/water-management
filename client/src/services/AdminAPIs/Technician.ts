@@ -1,10 +1,10 @@
 import MainAPIService from '../MainAPIService'
 
-export async function apiGetAllTechnician(data: any) {
+export async function apiGetAllTechnician() {
     return MainAPIService.fetchData<any>({
         url: '/api/getAllRegister',
         method: 'get',
-        data,
+        
     })
 }
 
