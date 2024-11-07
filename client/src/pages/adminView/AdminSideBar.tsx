@@ -20,6 +20,18 @@ const adminSidebarMenuItems = [
     // path: "/admin/orders",
     icon: <FaCheckCircle />,
   },
+  {
+    id: "services",
+    label: "Services",
+     path: "/admin/services",
+    icon: <FaCheckCircle />,
+  },
+  {
+    id: "addTech",
+    label: "Add Technician",
+    path: "/admin/addTech",
+    icon: <FaCheckCircle />,
+  },
 ];
 
 function MenuItems({ setOpen }) {

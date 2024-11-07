@@ -17,6 +17,9 @@ import Layout from "./components/Layout/Layout";
 import AdminLayout from "./pages/adminView/AdminLayout";
 import AdminDashboard from "./pages/adminView/AdminDashboard";
 import AddProduct from "./pages/adminView/AddProduct";
+import AdminServices from "./pages/adminView/AdminServices";
+import AddTechnician from "./pages/adminView/AddTechnician";
+
 
 function App() {
   return (
@@ -25,7 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up-user" element={<Signup/>}/>
-        <Route path="/serviceform" element={<ServiceForm/>}/>
+        <Route path={`/serviceform/:data`} element={<ServiceForm/>}/>
 
         <Route 
          element={
@@ -58,6 +61,8 @@ function App() {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="editproduct/:id" element={<AddProduct />} /> 
+          <Route path="services" element={<AdminServices />} /> 
+          <Route path="addTech" element={<AddTechnician />} /> 
         </Route>
        
 

@@ -69,7 +69,7 @@ const Services: React.FC = () => {
                       backgroundColor: '#06b6d4',
                     },
                   }}
-                  onClick={() => navigate('/serviceform')}
+                  onClick={() => navigate('/login')}
                   
                 >
                   Enquire Now

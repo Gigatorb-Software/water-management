@@ -33,7 +33,7 @@ function AdminHeader({ setOpen }: any) {
       <div className="flex-1 flex justify-end">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 bg-red-500 text-white rounded px-4 py-2"
+          className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500  text-white rounded px-4 py-2"
         >
           <FiLogOut />
           Logout

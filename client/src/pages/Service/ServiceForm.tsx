@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -17,6 +17,10 @@ import {
     Link,
     Grid,
 } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import axios, { AxiosResponse } from 'axios';
+import { apiGetUserById } from '../../services/UserAPIs/User';
+import { apiCreateServices } from '../../services/AdminAPIs/AdminServices';
 
 interface FormValues {
     firstName: string;
@@ -24,14 +28,14 @@ interface FormValues {
     mobileNumber: string;
     email: string;
     category: string;
-    pinCode: string;
+    postalCode: string;
     state: string;
     city: string;
     serviceType: string;
     requestType: string;
-    address1: string;
-    address2: string;
-    nearbyPlace: string;
+    street: string;
+    country: string;
+    productId: string;
 }
 
 const validationSchema = Yup.object({
@@ -51,6 +55,10 @@ const validationSchema = Yup.object({
 });
 
 const ServiceForm: React.FC = () => {
+
+    const { data } = useParams()
+    console.log('Data', data)
+    const [formData, setFormData] = useState({})
     const formik = useFormik<FormValues>({
         initialValues: {
             firstName: '',
@@ -58,27 +66,63 @@ const ServiceForm: React.FC = () => {
             mobileNumber: '',
             email: '',
             category: '',
-            pinCode: '',
+            postalCode: '',
             state: '',
             city: '',
             serviceType: '',
             requestType: '',
-            address1: '',
-            address2: '',
-            nearbyPlace: '',
+            street: '',
+            country: '',
+            productId: '',
         },
         validationSchema,
-        onSubmit: (values) => {
-            console.log('Form Values:', values);
-            // Handle form submission logic here
+        onSubmit: async (values) => {
+            
+            try {
+                const response = await apiCreateServices({
+                    customerId: data, // Replace with actual customer ID
+                    productId: values.productId,
+                    serviceType: values.serviceType,
+                    receipt: 'ytegrwtyu', // Replace with actual receipt number
+                    serviceStatus: 'pending',
+                });
+
+                console.log('API response:', response.data);
+                // Handle success or error based on the API response
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                // Handle error, e.g., display an error message to the user
+            }
         },
     });
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (data) {
+                try {
+                    const response: AxiosResponse = await apiGetUserById(data)
+                    const userData = response.data
+                    setFormData(userData)
+
+                    console.log('Id', formData)
+
+                } catch (error) {
+                    console.error('Error fetching user data:', error)
+                }
+            }
+        }
+
+        fetchData()
+    }, [])
+
+
 
     return (
         <Box
             sx={{
                 minHeight: '100vh',
-                backgroundImage: 'url("https://html.ditsolution.net/drtheme/dreamhub/purify/assets/images/slider/hero-bg.jpg")',
+                backgroundImage: 'url(/WaterBackground.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 position: 'relative',
@@ -176,23 +220,25 @@ const ServiceForm: React.FC = () => {
                                         inputProps={{ sx: { fontSize: 12 } }}
                                     />
                                 </Grid>
+
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         fullWidth
                                         size="small"
-                                        id="pinCode"
-                                        name="pinCode"
-                                        label="Enter Pin Code"
-                                        placeholder="Enter your pin code"
-                                        value={formik.values.pinCode}
+                                        id="productId"
+                                        name="productId"
+                                        label="ProductId"
+                                        placeholder="Enter your ProductId"
+                                        value={formik.values.productId}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        error={formik.touched.pinCode && Boolean(formik.errors.pinCode)}
-                                        helperText={formik.touched.pinCode && formik.errors.pinCode}
+                                        error={formik.touched.productId && Boolean(formik.errors.productId)}
+                                        helperText={formik.touched.productId && formik.errors.productId}
                                         InputLabelProps={{ sx: { fontSize: 12 } }}
                                         inputProps={{ sx: { fontSize: 12 } }}
                                     />
                                 </Grid>
+
                             </Grid>
 
                             {/* Email Address and Category */}
@@ -249,6 +295,46 @@ const ServiceForm: React.FC = () => {
 
                             {/* State and City */}
                             <Grid container spacing={2}>
+
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        size="small"
+                                        id="street"
+                                        name="street"
+                                        label="Enter street"
+                                        placeholder="Enter your street"
+                                        value={formik.values.street}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.street && Boolean(formik.errors.street)}
+                                        helperText={formik.touched.street && formik.errors.street}
+                                        InputLabelProps={{ sx: { fontSize: 12 } }}
+                                        inputProps={{ sx: { fontSize: 12 } }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        size="small"
+                                        id="city"
+                                        name="city"
+                                        label="Enter City"
+                                        placeholder="Enter your city"
+                                        value={formik.values.city}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.city && Boolean(formik.errors.city)}
+                                        helperText={formik.touched.city && formik.errors.city}
+                                        InputLabelProps={{ sx: { fontSize: 12 } }}
+                                        inputProps={{ sx: { fontSize: 12 } }}
+                                    />
+                                </Grid>
+                            </Grid>
+
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
                                     <FormControl fullWidth size="small">
                                         <InputLabel sx={{ fontSize: 12 }} id="state-label">
@@ -279,23 +365,26 @@ const ServiceForm: React.FC = () => {
                                         )}
                                     </FormControl>
                                 </Grid>
+
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         fullWidth
                                         size="small"
-                                        id="city"
-                                        name="city"
-                                        label="Enter City"
-                                        placeholder="Enter your city"
-                                        value={formik.values.city}
+                                        id="postalCode"
+                                        name="postalCode"
+                                        label="Enter Postal Code"
+                                        placeholder="Enter your postalCode"
+                                        value={formik.values.postalCode}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        error={formik.touched.city && Boolean(formik.errors.city)}
-                                        helperText={formik.touched.city && formik.errors.city}
+                                        error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
+                                        helperText={formik.touched.postalCode && formik.errors.postalCode}
                                         InputLabelProps={{ sx: { fontSize: 12 } }}
                                         inputProps={{ sx: { fontSize: 12 } }}
                                     />
                                 </Grid>
+
+
                             </Grid>
 
                             {/* Address Fields */}
@@ -304,79 +393,21 @@ const ServiceForm: React.FC = () => {
                                     <TextField
                                         fullWidth
                                         size="small"
-                                        id="address1"
-                                        name="address1"
-                                        label="Address 1"
-                                        placeholder="Enter your address"
-                                        value={formik.values.address1}
+                                        id="country"
+                                        name="country"
+                                        label="country"
+                                        placeholder="Enter your country"
+                                        value={formik.values.country}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        error={formik.touched.address1 && Boolean(formik.errors.address1)}
-                                        helperText={formik.touched.address1 && formik.errors.address1}
+                                        error={formik.touched.country && Boolean(formik.errors.country)}
+                                        helperText={formik.touched.country && formik.errors.country}
                                         InputLabelProps={{ sx: { fontSize: 12 } }}
                                         inputProps={{ sx: { fontSize: 12 } }}
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        size="small"
-                                        id="address2"
-                                        name="address2"
-                                        label="Address 2 (Optional)"
-                                        placeholder="Enter additional address info"
-                                        value={formik.values.address2}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        InputLabelProps={{ sx: { fontSize: 12 } }}
-                                        inputProps={{ sx: { fontSize: 12 } }}
-                                    />
-                                </Grid>
-                            </Grid>
 
-                            {/* Nearby Place */}
-                            <Grid item xs={12}>
-                                <TextField
-                                    fullWidth
-                                    size="small"
-                                    id="nearbyPlace"
-                                    name="nearbyPlace"
-                                    label="Nearby Place"
-                                    placeholder="Enter a nearby place"
-                                    value={formik.values.nearbyPlace}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                                    inputProps={{ sx: { fontSize: 12 } }}
-                                />
                             </Grid>
-
-                            {/* Request Type */}
-                            <Box>
-                                <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                                    Request Type
-                                </Typography>
-                                <RadioGroup
-                                    row
-                                    id="requestType"
-                                    name="requestType"
-                                    value={formik.values.requestType}
-                                    onChange={formik.handleChange}
-                                >
-                                    <FormControlLabel
-                                        value="service"
-                                        control={<Radio />}
-                                        label="Service"
-                                        sx={{ mr: 2 }}
-                                    />
-                                    <FormControlLabel
-                                        value="newPurchase"
-                                        control={<Radio />}
-                                        label="New Purchase"
-                                        sx={{ mr: 2 }}
-                                    />
-                                </RadioGroup>
-                            </Box>
 
                             {/* Service Type */}
                             <FormControl fullWidth size="small">
@@ -397,9 +428,9 @@ const ServiceForm: React.FC = () => {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value="service1">Service 1</MenuItem>
-                                    <MenuItem value="service2">Service 2</MenuItem>
-                                    <MenuItem value="service3">Service 3</MenuItem>
+                                    <MenuItem value="installation">Installation</MenuItem>
+                                    {/* <MenuItem value="service2">Service 2</MenuItem>
+                                    <MenuItem value="service3">Service 3</MenuItem> */}
                                 </Select>
                                 {formik.touched.serviceType && formik.errors.serviceType && (
                                     <Typography variant="caption" color="error">

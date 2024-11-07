@@ -100,7 +100,7 @@ const AddProduct = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-2xl font-bold mb-6 text-center text-[#0891b2]">
         {id ? "Edit Product" : "Add New Product"}
       </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -235,7 +235,7 @@ const AddProduct = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="w-full bg-cyan-600 hover:bg-cyan-500 text-white rounded-md p-2  transition-colors"
         >
           {id ? "Update Product" : "Add Product"}
         </button>
