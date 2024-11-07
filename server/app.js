@@ -6,7 +6,7 @@ import cors from "cors";
 
 import publicRoutes from "./src/routes/public";
 import apiRoutes from "./src/routes/api";
-import adminRoutes from "./src/routes/admin";
+import adminRoutes from "./src/routes/admin.js";
 import apiMiddleware from "./src/middleware/apiAuth";
 import adminMiddleware from "./src/middleware/adminAuth";
 import errorHandler from "./src/middleware/errorHandler";
@@ -37,6 +37,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization", "RefreshToken"],
   exposedHeaders: ["Content-Length", "Content-Type", "RefreshToken", "Token"],
 };
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
@@ -45,6 +46,8 @@ app.use("/api", userRoutes);
 app.use("/api", technicianRoutes);
 app.use("/api", serviceRoutes);
 app.use("/pub", publicRoutes);
+app.use("/admin", adminRoutes);
+
 // app.use('/api', apiMiddleware, apiRoutes);
 // app.use('/api/admin', apiMiddleware, adminMiddleware, adminRoutes);
 app.use(errorHandler);

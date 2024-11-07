@@ -11,29 +11,41 @@ import { useNavigate } from "react-router-dom";
 
 // Example product data type
 type Product = {
-  id: string;
-  title: string;
-  brand: string;
+  id: number;
+  productName: string;
+  description: string;
   category: string;
-  salePrice: string;
+  price: string;
+  stockQuantity: number;
+  warrantyPeriod: number;
+  is_active: boolean;
   image: string;
-  totalStock: number;
-  price: number;
 };
 
 const AdminDashboard = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/admin/products",
-        {
-          withCredentials: true, // Send the cookie along with the request
-        }
+        "http://localhost:3000/admin/products"
+        // {
+        //   withCredentials: true, // Send the cookie along with the request
+        // }
       );
-      console.log("response", response);
-      setProducts(response.data);
+       // Map the data to match the expected structure in Product type
+       const mappedProducts = response?.data?.products?.map((product) => ({
+        id: product.id,
+        productName: product.productName,
+        description: product.description,
+        category: product.category,
+        price: product.price,
+        stockQuantity: product.stockQuantity,
+        warrantyPeriod: product.warrantyPeriod,
+        is_active: product.is_active,
+        image: product.images[0]?.image_url || "", // Extract first image URL
+      }));
+      setProducts(mappedProducts);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -43,9 +55,8 @@ const AdminDashboard = () => {
   }, []);
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/admin/product/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(`http://localhost:3000/admin/product/${id}`
+    );
       // setProducts(products.filter((product) => product.id !== id));
       fetchProducts();
       alert("Product deleted successfully!");
@@ -61,42 +72,24 @@ const AdminDashboard = () => {
   const columns = useMemo<MRT_ColumnDef<Product>[]>(
     () => [
       {
-        accessorKey: "id", // Unique identifier
+        accessorKey: "id",
         header: "ID",
         size: 20,
       },
       {
-        accessorKey: "title", // Unique identifier
-        header: "Title",
-        size: 200,
+        accessorKey: "productName",
+        header: "Product Name",
+        size: 150,
       },
       {
-        accessorKey: "category", // Unique identifier
+        accessorKey: "category",
         header: "Category",
-        size: 200,
+        size: 150,
       },
       {
-        accessorKey: "brand",
-        header: "brand",
-        size: 200,
-        Cell: ({ cell }) => (
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={cell.row.original.image}
-              alt={cell.row.original.brand}
-              width="50"
-              height="50"
-              style={{ marginRight: 10 }}
-            />
-            {cell.row.original.brand}
-          </div>
-        ),
-      },
-      {
-        accessorKey: "totalStock",
-        header: "Stock",
-        size: 100,
-        Cell: ({ cell }) => (cell.row.original.totalStock ? "true" : "false"),
+        accessorKey: "description",
+        header: "Description",
+        size: 150,
       },
       {
         accessorKey: "price",
@@ -104,27 +97,38 @@ const AdminDashboard = () => {
         size: 100,
       },
       {
+        accessorKey: "stockQuantity",
+        header: "Stock Quantity",
+        size: 100,
+        Cell: ({ cell }) => (cell.row.original.stockQuantity > 0 ? "In Stock" : "Out of Stock"),
+      },
+      {
+        accessorKey: "image",
+        header: "Image",
+        size: 150,
+        Cell: ({ cell }) => (
+          <img
+            src={cell.row.original.image}
+            alt={cell.row.original.productName}
+            width="50"
+            height="50"
+          />
+        ),
+      },
+      {
         accessorKey: "actions",
-        header: "Action",
+        header: "Actions",
         size: 150,
         Cell: ({ cell }) => (
           <div className="flex">
-            {/* <Button variant="contained" color="success" startIcon={<Edit />}>
-              Edit
-            </Button> */}
-            {/* <IconButton color="success" style={{ marginLeft: 1 }}>
-              <Edit />
-            </IconButton> */}
             <IconButton
               color="success"
-              style={{ marginLeft: 1 }}
               onClick={() => handleEdit(cell.row.original.id)}
             >
               <Edit />
             </IconButton>
             <IconButton
               color="error"
-              style={{ marginLeft: 1 }}
               onClick={() => handleDelete(cell.row.original.id)}
             >
               <Delete />
@@ -135,6 +139,7 @@ const AdminDashboard = () => {
     ],
     []
   );
+
 
   const table = useMaterialReactTable({
     columns,

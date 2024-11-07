@@ -7,30 +7,27 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({
     image: null,
-    title: "",
+    productName: "",
     description: "",
     category: "",
-    brand: "",
     price: "",
-    salePrice: "",
-    totalStock: "",
-    averageReview: "",
+    stockQuantity: "",
+    warrantyPeriod: "",
+    is_active: true,
+    userId: "",
   });
   const [currentImage, setCurrentImage] = useState(null);
+
   useEffect(() => {
     if (id) {
-      // Fetch product data and populate form
       const fetchProduct = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/admin/product/${id}`,
-            {
-              withCredentials: true,
-            }
+            `http://localhost:3000/admin/product/${id}`
+            // { withCredentials: true }
           );
-          // console.log("responsesas", response.data);
           setProduct(response?.data?.product);
-          setCurrentImage(response?.data?.product.image); // Set current image
+          setCurrentImage(response?.data?.product.image);
         } catch (error) {
           console.error("Error fetching product:", error);
         }
@@ -40,7 +37,11 @@ const AddProduct = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -49,56 +50,47 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('product', product)
 
     const formData = new FormData();
 
-    // Append the image field (either the new file or current image URL)
     if (product.image instanceof File) {
       formData.append("image", product.image);
     } else if (currentImage) {
-      formData.append("imageUrl", currentImage); // Send the existing image URL if no new image is selected
+      formData.append("imageUrl", currentImage);
     }
 
-    formData.append("title", product.title);
+    formData.append("productName", product.productName);
     formData.append("description", product.description);
     formData.append("category", product.category);
-    formData.append("brand", product.brand);
     formData.append("price", product.price);
-    formData.append("salePrice", product.salePrice);
-    formData.append("totalStock", product.totalStock);
-    formData.append("averageReview", product.averageReview);
+    formData.append("stockQuantity", product.stockQuantity);
+    formData.append("warrantyPeriod", product.warrantyPeriod);
+    formData.append("is_active", product.is_active);
+    formData.append("userId", product.userId);
 
     try {
       let response;
       if (id) {
-        // Update existing product
         response = await axios.put(
-          `http://localhost:8000/api/admin/product/${id}`,
+          `http://localhost:3000/admin/product/${id}`,
           formData,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
           }
         );
       } else {
-        // Add new product
         response = await axios.post(
-          "http://localhost:8000/api/admin/product",
+          "http://localhost:3000/admin/product",
           formData,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
           }
         );
       }
-      console.log(response.data);
-      alert(
-        id ? "Product updated successfully!" : "Product added successfully!"
-      );
+      alert(id ? "Product updated successfully!" : "Product added successfully!");
       navigate("/admin/dashboard");
     } catch (error) {
       console.error("Error submitting product:", error);
@@ -112,21 +104,21 @@ const AddProduct = () => {
         {id ? "Edit Product" : "Add New Product"}
       </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Product Title */}
+        {/* Product Name */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Title:</label>
+          <label className="mb-2 font-medium text-gray-700">Product Name:</label>
           <input
             type="text"
-            name="title"
-            value={product.title}
+            name="productName"
+            value={product.productName}
             onChange={handleChange}
             required
             className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Enter product title"
+            placeholder="Enter product name"
           />
         </div>
 
-        {/* Product Description */}
+        {/* Description */}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Description:</label>
           <textarea
@@ -140,7 +132,7 @@ const AddProduct = () => {
           ></textarea>
         </div>
 
-        {/* Product Category */}
+        {/* Category */}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Category:</label>
           <input
@@ -154,21 +146,7 @@ const AddProduct = () => {
           />
         </div>
 
-        {/* Product Brand */}
-        <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Brand:</label>
-          <input
-            type="text"
-            name="brand"
-            value={product.brand}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Enter product brand"
-          />
-        </div>
-
-        {/* Product Price */}
+        {/* Price */}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Price:</label>
           <input
@@ -182,59 +160,61 @@ const AddProduct = () => {
           />
         </div>
 
-        {/* Sale Price */}
+        {/* Stock Quantity */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Sale Price:</label>
+          <label className="mb-2 font-medium text-gray-700">Stock Quantity:</label>
           <input
             type="number"
-            name="salePrice"
-            value={product.salePrice}
-            onChange={handleChange}
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Enter sale price (optional)"
-          />
-        </div>
-
-        {/* Total Stock */}
-        <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Total Stock:</label>
-          <input
-            type="number"
-            name="totalStock"
-            value={product.totalStock}
+            name="stockQuantity"
+            value={product.stockQuantity}
             onChange={handleChange}
             required
             className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Enter total stock"
+            placeholder="Enter stock quantity"
           />
         </div>
 
-        {/* Average Review */}
+        {/* Warranty Period */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">
-            Average Review:
-          </label>
+          <label className="mb-2 font-medium text-gray-700">Warranty Period:</label>
           <input
-            type="number"
-            name="averageReview"
-            value={product.averageReview}
+            type="text"
+            name="warrantyPeriod"
+            value={product.warrantyPeriod}
             onChange={handleChange}
-            step="0.1"
+            required
             className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-            placeholder="Enter average review (optional)"
+            placeholder="Enter warranty period"
           />
         </div>
 
-        {/* Product Image */}
-        {/* <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Image:</label>
+        {/* Is Active */}
+        <div className="flex items-center">
           <input
-            type="file"
-            onChange={handleFileChange}
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            type="checkbox"
+            name="is_active"
+            checked={product.is_active}
+            onChange={handleChange}
+            className="mr-2"
           />
-        </div> */}
-        {/* Product Image */}
+          <label className="font-medium text-gray-700">Is Active</label>
+        </div>
+
+        {/* User ID */}
+        <div className="flex flex-col">
+          <label className="mb-2 font-medium text-gray-700">User ID:</label>
+          <input
+            type="text"
+            name="userId"
+            value={product.userId}
+            onChange={handleChange}
+            required
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            placeholder="Enter user ID"
+          />
+        </div>
+
+        {/* Image */}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Image:</label>
           {currentImage && (
