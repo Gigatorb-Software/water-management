@@ -11,7 +11,7 @@ import Products from "../../components/Layout/Card";
 
 const Home = () => {
   return (
-    <Layout>
+    <>
       {/* <QualityServices /> */}
       {/* <CuttingEdge /> */}
       {/* <Services /> */}
@@ -24,7 +24,7 @@ const Home = () => {
       <QualityServices/>
       <Services />
       <ContactUsForm/>
-    </Layout>
+    </>
   );
 };
 

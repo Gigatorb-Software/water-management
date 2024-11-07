@@ -7,17 +7,8 @@ function AdminHeader({ setOpen }: any) {
   const navigate = useNavigate();
   
   const handleLogout = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/api/logout", {
-        withCredentials: true,
-      });
-      if (res.data.success) {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
-      
-    }
+     localStorage.removeItem("token");
+     navigate("/");
   };
 
   return (

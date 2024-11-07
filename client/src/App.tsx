@@ -20,54 +20,30 @@ import AddProduct from "./pages/adminView/AddProduct";
 import AdminServices from "./pages/adminView/AdminServices";
 import AddTechnician from "./pages/adminView/AddTechnician";
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/sign-up-user" element={<Signup/>}/>
-        <Route path={`/serviceform`} element={<ServiceForm/>}/>
-
-        <Route 
-         element={
-          <ProtectedRouteToken>
-            <Layout />
-          </ProtectedRouteToken>
-        }
-        >
-        <Route path="/aboutUs" element={
-          <ProtectedRouteToken><QualityServices/></ProtectedRouteToken>
-          }/>
-        <Route path="/products" element={
-          <ProtectedRouteToken><Products/></ProtectedRouteToken>
-          
-          }/>
-        <Route path="/blogs" element={
-          <ProtectedRouteToken><BlogCard/></ProtectedRouteToken>
-          
-          }/>
-        <Route path="/services" element={
-          <ProtectedRouteToken><Services/></ProtectedRouteToken>
-          }/>
-        <Route path="/contact" element={
-          <ProtectedRouteToken><ContactUsForm/></ProtectedRouteToken>
-          }/>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up-user" element={<Signup />} />
+          <Route path={`/serviceform`} element={<ServiceForm />} />
+          <Route path="/aboutUs" element={<QualityServices />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/blogs" element={<BlogCard />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<ContactUsForm />} />
         </Route>
-         
-         {/* admin route  */}
-         <Route path="/admin" element={<AdminLayout />}>
+
+        {/* admin route  */}
+        <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="addproduct" element={<AddProduct />} />
-          <Route path="editproduct/:id" element={<AddProduct />} /> 
-          <Route path="services" element={<AdminServices />} /> 
-          <Route path="addTech" element={<AddTechnician />} /> 
+          <Route path="editproduct/:id" element={<AddProduct />} />
+          <Route path="services" element={<AdminServices />} />
+          <Route path="addTech" element={<AddTechnician />} />
         </Route>
-       
-
-       
-        
       </Routes>
     </BrowserRouter>
   );

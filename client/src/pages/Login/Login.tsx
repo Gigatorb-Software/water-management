@@ -56,22 +56,16 @@ const Login = () => {
 
   return (
     <section
-      className="min-h-screen flex items-center justify-center"
-      style={{
-        backgroundImage: "url(/WaterBackground.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="flex justify-center w-full py-11 bg-sky-50"
     >
-      <div className="w-96 h-auto max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-2/3 h-auto my-5 py-3 max-w-md bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className="p-4 sm:p-6">
           {/* <Link to="/" className="flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white">
             <img className="w-6 h-6 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
             Aqua-Fresh    
           </Link> */}
           <h1
-            className="text-bold text-xl text-gray-900 dark:text-white mb-4 "
+            className="text-bold text-xl flex justify-center text-gray-900 dark:text-white mb-4 "
             style={{ fontSize: 22 }}
           >
             Sign In

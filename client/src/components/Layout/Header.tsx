@@ -1,11 +1,11 @@
-
 import { Button } from "flowbite-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const token = localStorage.getItem("token") || null;
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -18,6 +18,11 @@ const Header = () => {
     { path: "/services", label: "Services" },
     { path: "/contact", label: "Contact Us" },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
     <header
@@ -34,7 +39,9 @@ const Header = () => {
       <nav className="container mx-auto flex items-center justify-between p-2">
         {/* Logo */}
         <div className="w-40 ml-10">
-          <img src="/logo1.png" alt="Logo" className="w-40 h-16" />
+          <Link to={"/"}>
+            <img src="/logo1.png" alt="Logo" className="w-40 h-16" />
+          </Link>
         </div>
 
         {/* Centered Links for desktop */}
@@ -52,7 +59,10 @@ const Header = () => {
         </ul>
 
         {/* Menu button for small screens */}
-        <button className="md:hidden block focus:outline-none" onClick={toggleMenu}>
+        <button
+          className="md:hidden block focus:outline-none"
+          onClick={toggleMenu}
+        >
           <svg
             className="w-6 h-6"
             fill="none"
@@ -71,16 +81,26 @@ const Header = () => {
 
         {/* Login link for desktop */}
         <div className="hidden md:block">
-          <Link to="/login">
-            <Button className="bg-cyan-600 mr-2 text-white ">
-              LogOut
+          {token ? (
+            <Button
+              className="bg-cyan-600 mr-2 text-white "
+              onClick={handleLogout}
+            >
+              Logout
             </Button>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <Button className="bg-cyan-600 mr-2 text-white ">Login</Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={toggleMenu}></div>
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-50"
+            onClick={toggleMenu}
+          ></div>
         )}
         <ul
           className={`${
