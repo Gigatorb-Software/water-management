@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import { apiGetUserById } from "../../services/UserAPIs/User";
+import { apiGetUserById, apiServiceFormSubmit } from "../../services/UserAPIs/User";
 import { apiCreateServices } from "../../services/AdminAPIs/AdminServices";
 
 interface FormValues {
@@ -149,16 +149,18 @@ const ServiceForm: React.FC = () => {
     }
 
     try {
-      // Send a POST request with FormData
-      const response = await axios.post(
-        "http://localhost:3000/api/createService",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      
+      // const response = await axios.post(
+      //   "http://localhost:3000/api/createService",
+      //   formData,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
+      let response = await apiServiceFormSubmit(formData);
+
       navigate("/");
     } catch (error) {
       console.error("Error submitting form:", error);

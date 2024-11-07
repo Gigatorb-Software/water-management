@@ -42,7 +42,7 @@ const AdminService = () => {
         customerName: `${service.User.firstName} ${service.User.lastName}`,
         bookingDate: new Date(service.bookingDate).toLocaleDateString("en-GB"),
       }));
-console.log('transformedServices', transformedServices)
+
       setServices(transformedServices);
     } catch (error) {
       console.error("Error fetching services:", error);

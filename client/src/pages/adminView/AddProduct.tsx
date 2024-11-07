@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { apiAddProduct, apiGetProductById, apiUpdateProductById } from "../../services/AdminAPIs/AdminCrud";
 
 const AddProduct = () => {
   const { id } = useParams();
@@ -22,10 +23,8 @@ const AddProduct = () => {
     if (id) {
       const fetchProduct = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:3000/admin/product/${id}`
-            // { withCredentials: true }
-          );
+          // const response = await axios.get(`http://localhost:3000/admin/product/${id}`);
+          const response = await apiGetProductById(id)
           setProduct(response?.data?.product);
           setCurrentImage(response?.data?.product.image);
         } catch (error) {
@@ -72,23 +71,25 @@ const AddProduct = () => {
     try {
       let response;
       if (id) {
-        response = await axios.put(
-          `http://localhost:3000/admin/product/${id}`,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            withCredentials: true,
-          }
-        );
+        // response = await axios.put(
+        //   `http://localhost:3000/admin/product/${id}`,
+        //   formData,
+        //   {
+        //     headers: { "Content-Type": "multipart/form-data" },
+        //   }
+        // );
+         response = await apiUpdateProductById(id, formData);
       } else {
-        response = await axios.post(
-          "http://localhost:3000/admin/product",
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            withCredentials: true,
-          }
-        );
+        // response = await axios.post(
+        //   "http://localhost:3000/admin/product",
+        //   formData,
+        //   {
+        //     headers: { "Content-Type": "multipart/form-data" },
+            
+        //   }
+        // );
+        response = await apiAddProduct(formData);
+
       }
       alert(id ? "Product updated successfully!" : "Product added successfully!");
       navigate("/admin/dashboard");

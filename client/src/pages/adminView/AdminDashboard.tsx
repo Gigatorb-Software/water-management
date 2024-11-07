@@ -8,6 +8,7 @@ import { Button, IconButton } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { apiDeleteProductById, apiGetAllProducts } from "../../services/AdminAPIs/AdminCrud";
 
 // Example product data type
 type Product = {
@@ -27,12 +28,9 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/admin/products"
-        // {
-        //   withCredentials: true, // Send the cookie along with the request
-        // }
-      );
+      // const response = await axios.get("http://localhost:3000/admin/products");
+      const response = await apiGetAllProducts();
+
        // Map the data to match the expected structure in Product type
        const mappedProducts = response?.data?.products?.map((product) => ({
         id: product.id,
@@ -55,8 +53,8 @@ const AdminDashboard = () => {
   }, []);
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/admin/product/${id}`
-    );
+      // await axios.delete(`http://localhost:3000/admin/product/${id}`);
+     await apiDeleteProductById(id)
       // setProducts(products.filter((product) => product.id !== id));
       fetchProducts();
       alert("Product deleted successfully!");
