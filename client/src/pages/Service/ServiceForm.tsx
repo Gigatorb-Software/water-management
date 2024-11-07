@@ -17,7 +17,7 @@ import {
   Link,
   Grid,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { apiGetUserById } from "../../services/UserAPIs/User";
 import { apiCreateServices } from "../../services/AdminAPIs/AdminServices";
@@ -56,8 +56,7 @@ const validationSchema = Yup.object({
 
 const ServiceForm: React.FC = () => {
   //   const { data } = useParams();
-  //   console.log("Data", data);
-  //   const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId");
   const [formData, setFormData] = useState({});
@@ -76,7 +75,6 @@ const ServiceForm: React.FC = () => {
       street: "",
       country: "",
       productId: "",
-      
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -103,7 +101,7 @@ const ServiceForm: React.FC = () => {
         try {
           const response: AxiosResponse = await apiGetUserById(userId);
           const userData = response?.data?.data;
-          console.log("firstttt", userData);
+
           setFormData(userData?.data);
 
           // Update formik values with fetched data
@@ -135,38 +133,38 @@ const ServiceForm: React.FC = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Create FormData object
     const formData = new FormData();
-    formData.append('customerId', userId); // Replace `userId` with the actual customer ID
-    formData.append('productId', 4);
-    formData.append('serviceType', formik.values.serviceType);
-    formData.append('serviceStatus', 'pending');
-  console.log('formik.values.receipt', formik.values.receipt)
+    formData.append("customerId", userId); // Replace `userId` with the actual customer ID
+    formData.append("productId", 4);
+    formData.append("serviceType", formik.values.serviceType);
+    formData.append("serviceStatus", "pending");
+
     // Assuming `formik.values.receipt` holds the PDF file
     const pdfFile = formik.values.receipt;
-    console.log('pdfFile', pdfFile)
+
     if (pdfFile) {
-      formData.append('receipt', pdfFile); // Attach the PDF file to FormData
+      formData.append("receipt", pdfFile); // Attach the PDF file to FormData
     }
-  
+
     try {
       // Send a POST request with FormData
-      const response = await axios.post('http://localhost:3000/api/createService', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-  
-      // Handle the response
-      console.log("API response:", response.data);
-      alert(response.data.message)
+      const response = await axios.post(
+        "http://localhost:3000/api/createService",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      navigate("/");
     } catch (error) {
       console.error("Error submitting form:", error);
       // Handle the error (e.g., display an error message)
     }
   };
-  
 
   return (
     <Box
@@ -332,7 +330,7 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12 } }}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                {/* <Grid item xs={12} sm={6}>
                   <FormControl fullWidth size="small">
                     <InputLabel sx={{ fontSize: 12 }} id="category-label">
                       Purifier You Own
@@ -364,11 +362,7 @@ const ServiceForm: React.FC = () => {
                       </Typography>
                     )}
                   </FormControl>
-                </Grid>
-              </Grid>
-
-              {/* State and City */}
-              <Grid container spacing={2}>
+                </Grid> */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
@@ -388,7 +382,10 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12 } }}
                   />
                 </Grid>
+              </Grid>
 
+              {/* State and City */}
+              <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
@@ -406,16 +403,13 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12 } }}
                   />
                 </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
                     size="small"
                     id="state"
                     name="state"
-                    label="Enter staet"
+                    label="Enter state"
                     placeholder="Enter your state"
                     value={formik.values.city}
                     onChange={formik.handleChange}
@@ -426,7 +420,9 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12 } }}
                   />
                 </Grid>
+              </Grid>
 
+              <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
@@ -449,11 +445,7 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12 } }}
                   />
                 </Grid>
-              </Grid>
-
-              {/* Address Fields */}
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
                     size="small"
@@ -473,10 +465,13 @@ const ServiceForm: React.FC = () => {
                   />
                 </Grid>
               </Grid>
+
+              {/* Address Fields */}
+              <Grid container spacing={2}></Grid>
               <input
                 type="file"
                 name="receipt"
-                className="border"
+                className="border border-gray-300 rounded-md"
                 onChange={(event) => {
                   formik.setFieldValue("receipt", event.currentTarget.files[0]);
                 }}

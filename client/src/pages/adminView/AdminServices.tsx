@@ -97,7 +97,7 @@ console.log('transformedServices', transformedServices)
   <Typography
     variant="h5"
     component="h2"
-    sx={{ fontWeight: "600", mb: 2, textAlign: "center" }}
+    sx={{ fontWeight: "600", m: 2, textAlign: "center" }}
     className="text-xl text-[#0891b2] font-semibold mb-4"
   >
     Service List
