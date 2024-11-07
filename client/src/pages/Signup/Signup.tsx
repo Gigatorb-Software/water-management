@@ -262,7 +262,7 @@ const Signup = () => {
         phone,
         email,
         password,
-        roleId : 1,
+        roleId : 2,
         street,
         city,
         state,

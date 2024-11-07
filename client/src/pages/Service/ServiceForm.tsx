@@ -56,8 +56,7 @@ const validationSchema = Yup.object({
 
 const ServiceForm: React.FC = () => {
 
-    const { data } = useParams()
-    console.log('Data', data)
+    const userId = localStorage.getItem("userId");
     const [formData, setFormData] = useState({})
     const formik = useFormik<FormValues>({
         initialValues: {
@@ -80,11 +79,11 @@ const ServiceForm: React.FC = () => {
             
             try {
                 const response = await apiCreateServices({
-                    customerId: data, // Replace with actual customer ID
-                    productId: values.productId,
-                    serviceType: values.serviceType,
-                    receipt: 'ytegrwtyu', // Replace with actual receipt number
-                    serviceStatus: 'pending',
+                  customerId: userId, // Replace with actual customer ID
+                  productId: values.productId,
+                  serviceType: values.serviceType,
+                  receipt: "ytegrwtyu", // Replace with actual receipt number
+                  serviceStatus: "pending",
                 });
 
                 console.log('API response:', response.data);
@@ -99,17 +98,16 @@ const ServiceForm: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            if (data) {
-                try {
-                    const response: AxiosResponse = await apiGetUserById(data)
-                    const userData = response.data
-                    setFormData(userData)
+            if (userId) {
+              try {
+                const response: AxiosResponse = await apiGetUserById(userId);
+                const userData = response.data;
+                setFormData(userData);
 
-                    console.log('Id', formData)
-
-                } catch (error) {
-                    console.error('Error fetching user data:', error)
-                }
+                console.log("Id", formData);
+              } catch (error) {
+                console.error("Error fetching user data:", error);
+              }
             }
         }
 

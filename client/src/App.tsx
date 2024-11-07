@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/sign-up-user" element={<Signup/>}/>
-        <Route path={`/serviceform/:data`} element={<ServiceForm/>}/>
+        <Route path={`/serviceform`} element={<ServiceForm/>}/>
 
         <Route 
          element={

@@ -7,9 +7,9 @@ import { apiSignIn } from "../../services/AuthenticationAPIs/authenticationServi
 
 const Login = () => {
   // Initialize useNavigate
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
   const navigate = useNavigate();
- 
+
   // Define the validation schema using Yup
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -26,37 +26,39 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log("Form data", values);
       try {
-        // Call apiSignIn function directly with the values
-        const response = await apiSignIn({
+        const res = await apiSignIn({
           email: values.email,
           password: values.password,
         });
+        console.log();
 
-        
-        //  setData( response.data.user)
+        localStorage.setItem("roleId", res?.data?.roleId);
+        localStorage.setItem("userId", res?.data?.userId);
+        localStorage.setItem("token", res?.data?.token);
 
-         console.log("Response:", response.data);
-
-         const userId = response.data.user.id;
-
-         console.log('userId', userId)
-
-          navigate(`/serviceform/${userId}`);  // Redirect to home page or another route on success
-       
+        switch (res?.data?.roleId) {
+          case 1:
+            navigate("/admin/dashboard");
+            break;
+          case 2:
+            navigate("/serviceform");
+            break;
+          default:
+            alert("Invalid role");
+            break;
+        }
       } catch (error) {
         console.log("Error:", error);
       }
     },
   });
 
-
   return (
     <section
       className="min-h-screen flex items-center justify-center"
       style={{
-        backgroundImage: 'url(/WaterBackground.jpg)',
+        backgroundImage: "url(/WaterBackground.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -185,4 +187,3 @@ const Login = () => {
 };
 
 export default Login;
-
