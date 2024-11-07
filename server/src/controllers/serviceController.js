@@ -1,37 +1,90 @@
 // controllers/serviceController.js
 import { Service, User, Address } from "../models";
+import { upload, imageUploadUtil } from '../helpers/cloudinary.js';
 
+// export const createService = async (req, res) => {
+//   try {
+//     const { customerId, productId, serviceType, receipt, serviceStatus } =
+//       req.body;
+
+//     // Validate required fields
+//     if (!customerId || !productId || !serviceType || !receipt) {
+//       return res.status(400).json({
+//         message:
+//           "Missing required fields: userId, productId, serviceType, or scheduledDate",
+//       });
+//     }
+
+//     // Create new service booking
+//     const newServiceBooking = await Service.create({
+//       customerId,
+//       productId,
+//       serviceType,
+//       receipt,
+//       serviceStatus,
+//     });
+
+//     // Respond with success
+//     return res.status(201).json({
+//       message: "Service booking created successfully",
+//       data: newServiceBooking,
+//     });
+//   } catch (error) {
+//     console.error("Error creating service booking:", error);
+//     return res.status(500).json({
+//       message: "Error creating service booking",
+//       error: error.message,
+//     });
+//   }
+// };
 export const createService = async (req, res) => {
   try {
-    const { customerId, productId, serviceType, receipt, serviceStatus } =
-      req.body;
+    // Use multer to handle file upload
+    upload.single('receipt')(req, res, async (err) => {
+      if (err) {
+        return res.status(400).json({ message: 'Error uploading file', error: err.message });
+      }
 
-    // Validate required fields
-    if (!customerId || !productId || !serviceType || !receipt) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: userId, productId, serviceType, or scheduledDate",
+      const { customerId, productId, serviceType, serviceStatus } = req.body;
+
+      // Validate required fields
+      if (!customerId || !productId || !serviceType) {
+        return res.status(400).json({
+          message: "Missing required fields: customerId, productId, or serviceType",
+        });
+      }
+
+      // If a receipt file was uploaded, upload it to Cloudinary
+      let receiptUrl = null;
+      if (req.file) {
+        try {
+          // Upload the file to Cloudinary
+          const cloudinaryResult = await imageUploadUtil(req.file.buffer);
+          receiptUrl = cloudinaryResult.secure_url; // Use the URL returned by Cloudinary
+        } catch (uploadError) {
+          return res.status(500).json({ message: 'Error uploading receipt to Cloudinary', error: uploadError.message });
+        }
+      }
+
+      // Create the new service booking entry
+      const newServiceBooking = await Service.create({
+        customerId,
+        productId,
+        serviceType,
+        receipt: receiptUrl, // Store the Cloudinary URL in the receipt field
+        serviceStatus,
       });
-    }
 
-    // Create new service booking
-    const newServiceBooking = await Service.create({
-      customerId,
-      productId,
-      serviceType,
-      receipt,
-      serviceStatus,
-    });
-
-    // Respond with success
-    return res.status(201).json({
-      message: "Service booking created successfully",
-      data: newServiceBooking,
+      // Respond with success
+      return res.status(201).json({
+        message: 'Service booking created successfully',
+        data: newServiceBooking,
+      });
     });
   } catch (error) {
-    console.error("Error creating service booking:", error);
+    console.error('Error creating service booking:', error);
     return res.status(500).json({
-      message: "Error creating service booking",
+      message: 'Error creating service booking',
       error: error.message,
     });
   }
