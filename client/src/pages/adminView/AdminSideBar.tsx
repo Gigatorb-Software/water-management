@@ -1,5 +1,6 @@
 import { FaTachometerAlt, FaBoxOpen, FaCheckCircle, FaChartPie, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const adminSidebarMenuItems = [
   {
@@ -24,7 +25,7 @@ const adminSidebarMenuItems = [
     id: "services",
     label: "Services",
      path: "/admin/services",
-    icon: <FaCheckCircle />,
+    icon: <SupportAgentIcon />,
   },
   {
     id: "addTech",
