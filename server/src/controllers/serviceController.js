@@ -124,3 +124,35 @@ export const getAllServices = async (req, res) => {
   }
 };
 
+export const updateService = async (req, res) => {
+  try {
+    const { id } = req.params; // Get service ID from request params
+    const {  serviceStatus, scheduledDate, technicianId } =
+      req.body;
+
+    // Find the existing service booking by ID
+    const service = await Service.findByPk(id);
+    if (!service) {
+      return res.status(404).json({ message: "Service booking not found" });
+    }
+
+    // Update the service booking with new data
+    await service.update({
+      serviceStatus: serviceStatus || service.serviceStatus,
+      scheduledDate: scheduledDate || service.scheduledDate,
+      technicianId: technicianId || service.technicianId,
+    });
+
+    // Respond with the updated service booking
+    return res.status(200).json({
+      message: "Service booking updated successfully",
+      data: service,
+    });
+  } catch (error) {
+    console.error("Error updating service booking:", error);
+    return res.status(500).json({
+      message: "Error updating service booking",
+      error: error.message,
+    });
+  }
+};
