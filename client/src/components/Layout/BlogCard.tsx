@@ -23,13 +23,13 @@ const BlogCard = () => {
                             />
                         </div>
                         <div className="p-4">
-                            <div className="mb-4 rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
+                            <div className="mb-4 rounded-full font-serif bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
                                 POPULAR
                             </div>
-                            <h6 className="mb-2 text-slate-800 text-xl font-semibold">
+                            <h6 className="mb-2 font-serif text-slate-800 text-xl font-semibold">
                                 Website Review Check
                             </h6>
-                            <p className="text-slate-600 leading-normal font-light">
+                            <p className="text-slate-600 leading-normal font-light font-serif">
                                 The place is close to Barceloneta Beach and bus stop just 2 min by walk
                                 and near to "Naviglio" where you can enjoy the main night life in
                                 Barcelona.
@@ -37,7 +37,7 @@ const BlogCard = () => {
                         </div>
                         <div className="flex items-center justify-between p-4">
                             <div>
-                                <a href="#" className="text-slate-800 font-semibold text-sm hover:underline flex items-center">
+                                <a href="#" className="text-slate-800 font-serif font-semibold text-sm hover:underline flex items-center">
                                     Learn More
                                     <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -59,13 +59,13 @@ const BlogCard = () => {
                             />
                         </div>
                         <div className="p-4">
-                            <div className="mb-4 rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
+                            <div className="mb-4 font-serif rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
                                 POPULAR
                             </div>
-                            <h6 className="mb-2 text-slate-800 text-xl font-semibold">
+                            <h6 className="mb-2 font-serif text-slate-800 text-xl font-semibold">
                                 Website Review Check
                             </h6>
-                            <p className="text-slate-600 leading-normal font-light">
+                            <p className="text-slate-600  font-serif leading-normal font-light">
                                 The place is close to Barceloneta Beach and bus stop just 2 min by walk
                                 and near to "Naviglio" where you can enjoy the main night life in
                                 Barcelona.
@@ -73,7 +73,7 @@ const BlogCard = () => {
                         </div>
                         <div className="flex items-center justify-between p-4">
                             <div>
-                                <a href="#" className="text-slate-800 font-semibold text-sm hover:underline flex items-center">
+                                <a href="#" className="text-slate-800 font-serif font-semibold text-sm hover:underline flex items-center">
                                     Learn More
                                     <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -95,13 +95,13 @@ const BlogCard = () => {
                             />
                         </div>
                         <div className="p-4">
-                            <div className="mb-4 rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
+                            <div className="mb-4 font-serif rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
                                 POPULAR
                             </div>
-                            <h6 className="mb-2 text-slate-800 text-xl font-semibold">
+                            <h6 className="mb-2 text-slate-800 font-serif text-xl font-semibold">
                                 Website Review Check
                             </h6>
-                            <p className="text-slate-600 leading-normal font-light">
+                            <p className="text-slate-600 font-serif leading-normal font-light">
                                 The place is close to Barceloneta Beach and bus stop just 2 min by walk
                                 and near to "Naviglio" where you can enjoy the main night life in
                                 Barcelona.
@@ -109,7 +109,7 @@ const BlogCard = () => {
                         </div>
                         <div className="flex items-center justify-between p-4">
                             <div>
-                                <a href="#" className="text-slate-800 font-semibold text-sm hover:underline flex items-center">
+                                <a href="#" className="text-slate-800 font-serif font-semibold text-sm hover:underline flex items-center">
                                     Learn More
                                     <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

@@ -112,30 +112,30 @@ const AdminService = () => {
   <Table sx={{ minWidth: 650 }} aria-label="admin service table">
     <TableHead>
       <TableRow>
-        <TableCell sx={{ fontWeight: "600" }}>ID</TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>ID</TableCell>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Customer Name
         </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Service Type
         </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Booking Date
         </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Schedule Date
         </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Technician
         </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600" }}>
+        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Status
         </TableCell>
         
-        <TableCell align="center" sx={{ fontWeight: "600" }}>
+        <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           PDF
         </TableCell>
-        <TableCell align="center" sx={{ fontWeight: "600" }}>
+        <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
           Action
         </TableCell>
       </TableRow>
@@ -143,19 +143,25 @@ const AdminService = () => {
     <TableBody>
       {services.map((service) => (
         <TableRow key={service.id}>
-          <TableCell>{service.id}</TableCell>
-          <TableCell>{service.customerName}</TableCell>
-          <TableCell>{service.serviceType}</TableCell>
-          <TableCell>{service.bookingDate}</TableCell>
-          <TableCell>
+          <TableCell  sx={{ fontFamily: 'serif' }}>{service.id}</TableCell>
+          <TableCell  sx={{ fontFamily: 'serif' }}>{service.customerName}</TableCell>
+          <TableCell  sx={{ fontFamily: 'serif' }}>{service.serviceType}</TableCell>
+          <TableCell  sx={{ fontFamily: 'serif' }}>{service.bookingDate}</TableCell>
+          <TableCell  sx={{ fontFamily: 'serif' }}>
             <TextField
               type="date"
               value={service.scheduleDate || ""}
               onChange={(e) =>
                 handleScheduleDateChange(service.id, e.target.value)
               }
-              sx={{ width: 150 }}
+              sx={{ width: 130, fontFamily: 'serif',}}
               InputLabelProps={{ shrink: true }}
+              InputProps={{
+                style: {
+                  fontFamily: 'serif',
+                  fontSize: '0.875rem'   // This should apply the serif font to the input
+                },
+              }}
             />
           </TableCell>
           <TableCell>
@@ -164,29 +170,29 @@ const AdminService = () => {
               onChange={(e) =>
                 handleTechnicianChange(service.id, e.target.value)
               }
-              sx={{ width: 150 }}
+              sx={{ width: 150, fontFamily: 'serif' }}
               displayEmpty
             >
-              <MenuItem value="" disabled>
+              <MenuItem value="" disabled  sx={{  fontFamily: 'serif' }}>
                 Select Technician
               </MenuItem>
               {technicians.map((tech) => (
-                <MenuItem key={tech} value={tech}>
+                <MenuItem key={tech} value={tech} sx={{  fontFamily: 'serif' }}>
                   {tech}
                 </MenuItem>
               ))}
             </Select>
           </TableCell>
-          <TableCell>{service.serviceStatus}</TableCell>
-          <TableCell align="center">
+          <TableCell  sx={{ fontFamily: 'serif' }}>{service.serviceStatus}</TableCell>
+          <TableCell align="center"  sx={{ fontFamily: 'serif' }}>
             {service.receipt ? (
               <InsertDriveFileIcon
               onClick={() => window.open(service?.receipt, "_blank")}
-              style={{ cursor: 'pointer', color: '#0891b2' }}
+              style={{ cursor: 'pointer', color: '#0891b2', fontFamily: 'serif' }}
               size={24}
             />
             ) : (
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" color="textSecondary"  sx={{ fontFamily: 'serif' }}>
                 No PDF Available
               </Typography>
             )}
@@ -197,6 +203,7 @@ const AdminService = () => {
               onClick={() => handleApprove(service.id)}
               disabled={service.serviceStatus === "Confirmed"}
               className="!bg-cyan-600 !hover:bg-cyan-500 text-white rounded px-4 py-2"
+              sx={{ fontFamily: 'serif' }}
             >
               Approve
             </Button>

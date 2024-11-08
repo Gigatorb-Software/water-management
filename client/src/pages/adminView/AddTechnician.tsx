@@ -55,7 +55,7 @@ const AddTechnician: React.FC = () => {
     <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap -mx-2 mb-4">
             <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                <label className="block text-sm font-medium text-gray-600">
+                <label className="block text-sm font-medium text-gray-600 font-serif">
                     Email:
                 </label>
                 <input
@@ -68,7 +68,7 @@ const AddTechnician: React.FC = () => {
                 />
             </div>
             <div className="w-full md:w-1/2 px-2">
-                <label className="block text-sm font-medium text-gray-600">
+                <label className="block text-sm font-medium text-gray-600 font-serif">
                     First Name:
                 </label>
                 <input
@@ -83,7 +83,7 @@ const AddTechnician: React.FC = () => {
         </div>
         <div className="flex flex-wrap -mx-2 mb-4">
             <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
-                <label className="block text-sm font-medium text-gray-600">
+                <label className="block text-sm font-medium text-gray-600 font-serif">
                     Last Name:
                 </label>
                 <input
@@ -96,7 +96,7 @@ const AddTechnician: React.FC = () => {
                 />
             </div>
             <div className="w-full md:w-1/2 px-2">
-                <label className="block text-sm font-medium text-gray-600">
+                <label className="block text-sm font-medium text-gray-600 font-serif">
                     Phone:
                 </label>
                 <input
@@ -110,7 +110,7 @@ const AddTechnician: React.FC = () => {
             </div>
         </div>
         <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 font-serif">
                 Address:
             </label>
             <input
@@ -123,7 +123,7 @@ const AddTechnician: React.FC = () => {
             />
         </div>
         <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 font-serif ">
                 Employment Date:
             </label>
             <input
@@ -131,13 +131,13 @@ const AddTechnician: React.FC = () => {
                 name="employmentDate"
                 value={formData.employmentDate}
                 onChange={handleChange}
-                className="mt-1 p-2 w-full border rounded-md"
+                className="mt-1 p-2 w-full border rounded-md font-serif"
                 required
             />
         </div>
         <button
             type="submit"
-            className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded px-4 py-2"
+            className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded px-4 py-2 font-serif"
         >
             Save
         </button>

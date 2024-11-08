@@ -39,6 +39,7 @@ const QualityServices: React.FC = () => {
           <Typography
             variant="body1"
             paragraph
+            fontFamily= 'serif'
             sx={{
               textAlign: { xs: 'center', md: 'left' },
               color: 'slategray', // Set text color to slate
@@ -52,6 +53,7 @@ const QualityServices: React.FC = () => {
           <Typography
             variant="body1"
             paragraph
+            fontFamily= 'serif'
             sx={{
               textAlign: { xs: 'center', md: 'left' },
               color: 'slategray', // Set text color to slate

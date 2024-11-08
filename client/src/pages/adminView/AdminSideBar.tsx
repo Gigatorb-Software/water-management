@@ -39,7 +39,7 @@ function MenuItems({ setOpen }) {
   const navigate = useNavigate();
 
   return (
-    <nav className="mt-8 flex flex-col gap-4">
+    <nav className="mt-8 flex flex-col gap-4 font-serif">
       {adminSidebarMenuItems.map((menuItem) => (
         <div
           key={menuItem.id}
@@ -47,7 +47,7 @@ function MenuItems({ setOpen }) {
             navigate(menuItem.path);
             if (setOpen) setOpen(false); // Close sidebar on menu item click
           }}
-          className="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-200 rounded-md"
+          className="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-200 rounded-md "
         >
           {menuItem.icon}
           <span>{menuItem.label}</span>
@@ -89,7 +89,7 @@ function AdminSideBar({ open, setOpen }) {
               className="flex items-center gap-2 cursor-pointer"
             >
               <FaChartPie size={30} />
-              <h1 className="text-2xl font-bold">Admin Panel</h1>
+              <h1 className="text-2xl font-bold font-serif">Admin Panel</h1>
             </div>
             <MenuItems setOpen={setOpen} />
           </aside>
@@ -103,7 +103,7 @@ function AdminSideBar({ open, setOpen }) {
           className="flex items-center gap-2 cursor-pointer"
         >
           <FaChartPie size={30} />
-          <h1 className="text-2xl font-bold">Admin Panel</h1>
+          <h1 className="text-2xl font-bold font-serif">Admin Panel</h1>
         </div>
         <MenuItems />
       </aside>

@@ -50,7 +50,7 @@ const Header = () => {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className="hover:text-cyan-500 text-cyan-600 font-semibold"
+                className="font-serif  text-cyan-600 font-semibold"
               >
                 {link.label}
               </Link>

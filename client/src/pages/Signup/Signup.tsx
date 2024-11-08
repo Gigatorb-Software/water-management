@@ -287,7 +287,7 @@ const Signup = () => {
         <div className="w-full bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-4 space-y-8 sm:p-4">
             <h1
-              className="text-bold text-xl flex justify-center my-4 text-gray-900 dark:text-white mb-4"
+              className="text-bold text-xl flex justify-center my-4 text-gray-900 dark:text-white mb-4 font-serif"
               style={{ fontSize: 22 }}
             >
               SignUp
@@ -298,7 +298,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="firstName"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     First Name
                   </label>
@@ -315,7 +315,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="lastName"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Last Name
                   </label>
@@ -335,7 +335,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Email
                   </label>
@@ -352,7 +352,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Password
                   </label>
@@ -372,7 +372,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="phone"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Phone Number
                   </label>
@@ -388,7 +388,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="street"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Street
                   </label>
@@ -408,7 +408,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="city"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     City
                   </label>
@@ -425,7 +425,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="state"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     State
                   </label>
@@ -445,7 +445,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="postalCode"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Postal Code
                   </label>
@@ -461,7 +461,7 @@ const Signup = () => {
                 <div>
                   <label
                     htmlFor="country"
-                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white"
+                    className="block mb-1 text-xs font-medium text-gray-900 dark:text-white font-serif"
                   >
                     Country
                   </label>
@@ -479,16 +479,16 @@ const Signup = () => {
               <button
                 type="submit"
                 className="w-full text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-300 
-                    font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+                    font-medium rounded-md text-sm px-4 py-1.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 font-serif"
               >
                 Sign Up
               </button>
             </form>
-            <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-center text-gray-500 dark:text-gray-400 font-serif">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-pink-700 font-semibold hover:underline"
+                className="text-pink-700 font-semibold hover:underline font-serif"
               >
                 Sign In
               </Link>

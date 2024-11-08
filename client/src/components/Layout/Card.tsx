@@ -153,16 +153,16 @@ function Products({ title, description, time, comments, imageUrl, tag } : any) {
         <div className="relative">
           <img className="w-full h-72" src={imageUrl} alt={title} />
           <div className="bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 hover:bg-gray-400 opacity-25"></div>
-          <div className="text-xs absolute top-0 right-0 bg-cyan-600 hover:bg-white px-4 py-2 text-white hover:text-cyan-600 mt-3 mr-3   transition duration-500 ease-in-out rounded-md hover:border-cyan-600">
+          <div className="text-xs absolute top-0 right-0 font-serif bg-cyan-600 hover:bg-white px-4 py-2 text-white hover:text-cyan-600 mt-3 mr-3   transition duration-500 ease-in-out rounded-md hover:border-cyan-600">
             {tag}
           </div>
         </div>
       </a>
       <div className="px-6 py-4 mb-auto">
-        <a href="#" className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2">
+        <a href="#" className="font-medium text-lg inline-block font-serif hover:text-cyan-600 transition duration-500 ease-in-out mb-2">
           {title}
         </a>
-        <p className="text-gray-500 text-sm">{description}</p>
+        <p className="text-gray-500 text-sm font-serif">{description}</p>
       </div>
       <div className="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
         <span className="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center">

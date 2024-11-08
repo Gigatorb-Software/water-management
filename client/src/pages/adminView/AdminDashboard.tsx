@@ -92,25 +92,25 @@ const AdminDashboard = () => {
         <Table sx={{ minWidth: 650 }} aria-label="product table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: "600" }}>ID</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Product Name</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Category</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Description</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Price</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Stock Status</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Image</TableCell>
-              <TableCell sx={{ fontWeight: "600" }}>Actions</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>ID</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Product Name</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Category</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Description</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Price</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Stock Status</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Image</TableCell>
+              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif'}}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.id}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>{product.productName}</TableCell>
-                <TableCell>{product.category}</TableCell>
-                <TableCell>{product.description}</TableCell>
-                <TableCell>{product.price}</TableCell>
-                <TableCell>
+                <TableCell sx={{ fontFamily: 'serif' }}>{product.id}</TableCell>
+                <TableCell  sx={{ fontFamily: 'serif' }}>{product.productName}</TableCell>
+                <TableCell  sx={{ fontFamily: 'serif' }}>{product.category}</TableCell>
+                <TableCell  sx={{ fontFamily: 'serif' }}>{product.description}</TableCell>
+                <TableCell  sx={{ fontFamily: 'serif' }}>{product.price}</TableCell>
+                <TableCell  sx={{ fontFamily: 'serif' }}>
                   {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
                 </TableCell>
                 <TableCell>

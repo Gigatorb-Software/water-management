@@ -15,7 +15,7 @@ function AdminHeader({ setOpen }: any) {
     <header className="flex items-center justify-between px-4 py-3 bg-white shadow border-b">
       <button
         onClick={() => setOpen(true)}
-        className="lg:hidden block text-gray-700 hover:text-gray-900"
+        className="lg:hidden block text-gray-700 hover:text-gray-900 font-serif"
       >
         <LuAlignJustify />
 
@@ -24,7 +24,7 @@ function AdminHeader({ setOpen }: any) {
       <div className="flex-1 flex justify-end">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500  text-white rounded px-4 py-2"
+          className="flex items-center gap-2 bg-cyan-600 hover:bg-cyan-500  text-white rounded px-4 py-2 font-serif"
         >
           <FiLogOut />
           Logout

@@ -20,7 +20,7 @@ const services: Service[] = [
     image: "AuroMaintenance.webp",
   },
   {
-    title: "Reparation",
+    title: "Repair",
     description: "We are the best when it comes to repair and provide hassle-free service for water purifiers.",
     image: "AuorRepair.webp",
   },
@@ -68,10 +68,10 @@ const Services: React.FC = () => {
                   style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px 8px 0 0' }}
                 />
                 <CardContent>
-                  <Typography variant="h6" align="center" gutterBottom>
+                  <Typography variant="h6" align="center" fontFamily= 'serif' gutterBottom>
                     {service.title}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary" align="center" paragraph>
+                  <Typography variant="body2" color="textSecondary" align="center" fontFamily= 'serif'  paragraph>
                     {service.description}
                   </Typography>
                   <Button
@@ -87,7 +87,7 @@ const Services: React.FC = () => {
                       },
                     }}
                     onClick={() => navigate('/login')}
-
+                    className='font-serif'
                   >
                     Enquire Now
                   </Button>

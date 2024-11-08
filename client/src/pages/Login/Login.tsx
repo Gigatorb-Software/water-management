@@ -65,7 +65,7 @@ const Login = () => {
             Aqua-Fresh    
           </Link> */}
           <h1
-            className="text-bold text-xl flex justify-center text-gray-900 dark:text-white mb-4 "
+            className="text-bold text-xl flex justify-center text-gray-900 dark:text-white mb-4 font-serif "
             style={{ fontSize: 22 }}
           >
             Sign In
@@ -75,7 +75,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white font-serif"
               >
                 Email
               </label>
@@ -104,7 +104,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white font-serif"
               >
                 Password
               </label>
@@ -142,14 +142,14 @@ const Login = () => {
                 />
                 <label
                   htmlFor="remember"
-                  className="ml-2 text-xs text-gray-600 dark:text-gray-300"
+                  className="ml-2 text-xs text-gray-600 dark:text-gray-300 font-serif"
                 >
                   Remember me
                 </label>
               </div>
               <Link
                 to="/forgot-password"
-                className="text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="text-xs font-medium text-primary-600 hover:underline dark:text-primary-500 font-serif"
               >
                 Forgot password?
               </Link>
@@ -158,17 +158,17 @@ const Login = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2"
+              className="w-full text-white font-serif bg-cyan-600 hover:bg-cyan-700 focus:ring-2 focus:outline-none focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2"
             >
               Sign in
             </button>
 
             {/* Sign Up Link */}
-            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center v">
               Don’t have an account yet?{" "}
               <Link
                 to="/sign-up-user"
-                className="text-pink-700 font-semibold text-xs"
+                className="text-pink-700 font-semibold text-xs font-serif"
               >
                 Sign-up
               </Link>

@@ -17,10 +17,10 @@ const CarouselComponent = () => {
 
       <div className="relative grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7">
-          <h3 className="max-w-2xl mb-4 text-2xl text-[#2b97b5] font-extrabold tracking-tight md:text-5xl md:leading-[3.5rem] dark:text-white">
+          <h3 className="max-w-2xl mb-4 text-2xl text-[#2b97b5]  font-extrabold tracking-tight md:text-5xl md:leading-[3.5rem] dark:text-white">
             Water Purification Solutions for Every Home
           </h3>
-          <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+          <p className="max-w-2xl mb-6 font-light font-serif text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
             From high-quality filters to comprehensive maintenance plans,
             Skyline ensures safe and pure water for all. Simplify your access to
             clean water with Skyline's trusted solutions.

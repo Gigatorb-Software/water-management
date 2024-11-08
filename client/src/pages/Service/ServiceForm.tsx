@@ -200,6 +200,7 @@ const ServiceForm: React.FC = () => {
               variant="h5"
               component="h2"
               sx={{ mt: 1, color: "#00ACC1" }}
+              fontFamily= 'serif'
             >
               For Our Services{" "}
               <Link href="#" underline="hover" sx={{ color: "#3182ce" }}></Link>
@@ -230,8 +231,8 @@ const ServiceForm: React.FC = () => {
                     helperText={
                       formik.touched.firstName && formik.errors.firstName
                     }
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -251,8 +252,8 @@ const ServiceForm: React.FC = () => {
                     helperText={
                       formik.touched.lastName && formik.errors.lastName
                     }
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12 , fontFamily: 'serif'} }}
                   />
                 </Grid>
               </Grid>
@@ -277,8 +278,8 @@ const ServiceForm: React.FC = () => {
                     helperText={
                       formik.touched.mobileNumber && formik.errors.mobileNumber
                     }
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12 ,fontFamily: 'serif'} }}
                   />
                 </Grid>
 
@@ -300,8 +301,8 @@ const ServiceForm: React.FC = () => {
                     helperText={
                       formik.touched.productId && formik.errors.productId
                     }
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
               </Grid>
@@ -322,8 +323,8 @@ const ServiceForm: React.FC = () => {
                     onBlur={formik.handleBlur}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
                 {/* <Grid item xs={12} sm={6}>
@@ -374,8 +375,8 @@ const ServiceForm: React.FC = () => {
                       formik.touched.street && Boolean(formik.errors.street)
                     }
                     helperText={formik.touched.street && formik.errors.street}
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
               </Grid>
@@ -395,8 +396,8 @@ const ServiceForm: React.FC = () => {
                     onBlur={formik.handleBlur}
                     error={formik.touched.city && Boolean(formik.errors.city)}
                     helperText={formik.touched.city && formik.errors.city}
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -412,8 +413,8 @@ const ServiceForm: React.FC = () => {
                     onBlur={formik.handleBlur}
                     error={formik.touched.city && Boolean(formik.errors.city)}
                     helperText={formik.touched.city && formik.errors.city}
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
               </Grid>
@@ -437,8 +438,8 @@ const ServiceForm: React.FC = () => {
                     helperText={
                       formik.touched.postalCode && formik.errors.postalCode
                     }
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12,fontFamily: 'serif' } }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -447,7 +448,7 @@ const ServiceForm: React.FC = () => {
                     size="small"
                     id="country"
                     name="country"
-                    label="country"
+                    label="Country"
                     placeholder="Enter your country"
                     value={formik.values.country}
                     onChange={formik.handleChange}
@@ -456,8 +457,8 @@ const ServiceForm: React.FC = () => {
                       formik.touched.country && Boolean(formik.errors.country)
                     }
                     helperText={formik.touched.country && formik.errors.country}
-                    InputLabelProps={{ sx: { fontSize: 12 } }}
-                    inputProps={{ sx: { fontSize: 12 } }}
+                    InputLabelProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
+                    inputProps={{ sx: { fontSize: 12 ,fontFamily: 'serif'} }}
                   />
                 </Grid>
               </Grid>
@@ -467,7 +468,7 @@ const ServiceForm: React.FC = () => {
               <input
                 type="file"
                 name="receipt"
-                className="border border-gray-300 rounded-md"
+                className="border border-gray-300 rounded-md font-serif"
                 onChange={(event) => {
                   formik.setFieldValue("receipt", event.currentTarget.files[0]);
                 }}
@@ -475,7 +476,7 @@ const ServiceForm: React.FC = () => {
 
               {/* Service Type */}
               <FormControl fullWidth size="small">
-                <InputLabel sx={{ fontSize: 12 }} id="serviceType-label">
+                <InputLabel sx={{ fontSize: 12 , fontFamily: 'serif'}} id="serviceType-label">
                   Selected Service
                 </InputLabel>
                 <Select
@@ -490,7 +491,7 @@ const ServiceForm: React.FC = () => {
                     Boolean(formik.errors.serviceType)
                   }
                   label="Service Type"
-                  sx={{ fontSize: 12 }}
+                  sx={{ fontSize: 12, fontFamily: 'serif' }}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -500,7 +501,7 @@ const ServiceForm: React.FC = () => {
                                     <MenuItem value="service3">Service 3</MenuItem> */}
                 </Select>
                 {formik.touched.serviceType && formik.errors.serviceType && (
-                  <Typography variant="caption" color="error">
+                  <Typography variant="caption" color="error" fontFamily= 'serif'>
                     {formik.errors.serviceType}
                   </Typography>
                 )}
@@ -520,6 +521,7 @@ const ServiceForm: React.FC = () => {
                   sx={{
                     mt: 1,
                     width: "20rem",
+                    fontFamily: 'serif',
                     backgroundColor: "#0891b2", // cyan-600 hex value
                     color: "white", // text color white
                     "&:hover": {

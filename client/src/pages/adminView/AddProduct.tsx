@@ -107,27 +107,27 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Product Name */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Product Name:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Product Name:</label>
           <input
             type="text"
             name="productName"
             value={product.productName}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter product name"
           />
         </div>
 
         {/* Description */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Description:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Description:</label>
           <textarea
             name="description"
             value={product.description}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter product description"
             rows="4"
           ></textarea>
@@ -135,56 +135,56 @@ const AddProduct = () => {
 
         {/* Category */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Category:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Category:</label>
           <input
             type="text"
             name="category"
             value={product.category}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter product category"
           />
         </div>
 
         {/* Price */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Price:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Price:</label>
           <input
             type="number"
             name="price"
             value={product.price}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter product price"
           />
         </div>
 
         {/* Stock Quantity */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Stock Quantity:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Stock Quantity:</label>
           <input
             type="number"
             name="stockQuantity"
             value={product.stockQuantity}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter stock quantity"
           />
         </div>
 
         {/* Warranty Period */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Warranty Period:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Warranty Period:</label>
           <input
             type="text"
             name="warrantyPeriod"
             value={product.warrantyPeriod}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter warranty period"
           />
         </div>
@@ -198,26 +198,26 @@ const AddProduct = () => {
             onChange={handleChange}
             className="mr-2"
           />
-          <label className="font-medium text-gray-700">Is Active</label>
+          <label className="font-medium text-gray-700 font-serif">Is Active</label>
         </div>
 
         {/* User ID */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">User ID:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">User ID:</label>
           <input
             type="text"
             name="userId"
             value={product.userId}
             onChange={handleChange}
             required
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
             placeholder="Enter user ID"
           />
         </div>
 
         {/* Image */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Image:</label>
+          <label className="mb-2 font-medium text-gray-700 font-serif">Image:</label>
           {currentImage && (
             <img
               src={currentImage}
@@ -229,14 +229,14 @@ const AddProduct = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:ring-blue-300 font-serif"
           />
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-cyan-600 hover:bg-cyan-500 text-white rounded-md p-2  transition-colors"
+          className="w-full bg-cyan-600 hover:bg-cyan-500 text-white rounded-md p-2  transition-colors font-serif"
         >
           {id ? "Update Product" : "Add Product"}
         </button>
