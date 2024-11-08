@@ -94,14 +94,21 @@ const AdminService = () => {
   return (
     <>
    <TableContainer component={Paper} className="my-4">
-  <Typography
-    variant="h5"
-    component="h2"
-    sx={{ fontWeight: "600", m: 2, textAlign: "center" }}
-    className="text-xl text-[#0891b2] font-semibold mb-4"
-  >
-    Service List
-  </Typography>
+ <Typography
+        variant="h2"
+        sx={{
+          color: '#00acc1',
+          fontFamily: 'serif',  // Match font family
+          fontWeight: 'medium',
+          marginBottom: '20px',
+          textAlign: 'center',
+          fontSize: { xs: '1.875rem', md: '2.25rem' },  // Adjust font size to match
+          marginTop: '20px',  // Optional: add top margin for spacing consistency
+        }}
+      >
+        Service Lists
+      </Typography>
+
   <Table sx={{ minWidth: 650 }} aria-label="admin service table">
     <TableHead>
       <TableRow>

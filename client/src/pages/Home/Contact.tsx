@@ -30,9 +30,25 @@ const ContactUsForm: React.FC = () => {
 
   return (
     <Box sx={{ maxWidth: 800, margin: '0 auto', padding: '20px', textAlign: 'center' }}>
-      <Typography variant="h4" sx={{ color: '#00acc1', fontWeight: 700, marginBottom: '10px' }}>
+      {/* <Typography variant="h4" sx={{ color: '#00acc1', fontWeight: 700, marginBottom: '10px' }}>
         Contact Us
-      </Typography>
+      </Typography> */}
+
+<Typography
+          variant="h2"
+          sx={{
+            color: '#00acc1',
+            fontFamily: 'serif',  // Match font family
+            fontWeight: 'medium',
+            marginBottom: '20px',
+            textAlign: 'center',
+            fontSize: { xs: '2.5rem', md: '3rem' },  // Adjust font size to match
+            marginTop: '20px',  // Optional: add top margin for spacing consistency
+          }}
+        >
+          Contact Us
+        </Typography>
+
       <Typography variant="subtitle1" sx={{ color: '#666', marginBottom: '30px' }}>
         Have anything we can help you with? Just get in touch with us.
       </Typography>

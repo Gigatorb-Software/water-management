@@ -49,7 +49,7 @@ const AddTechnician: React.FC = () => {
 
     return (
         <div className="w-full max-w-2xl mx-auto mt-4 p-6 bg-white shadow-md rounded-md">
-    <h2 className="text-xl text-[#0891b2] font-semibold mb-4">
+    <h2 className="text-3xl text-center font-serif font-medium text-cyan-600 mb-10 ">
         Add Technician
     </h2>
     <form onSubmit={handleSubmit}>

@@ -5,7 +5,22 @@ const QualityServices: React.FC = () => {
   return (
     <Box sx={{ padding: { xs: '20px', md: '50px' }, backgroundColor: '#f1f5f9' }}>
       {/* Title Section */}
-      <Typography variant="h4" sx={{ color: '#00acc1', fontWeight: 700, marginBottom: '20px', textAlign: 'center' }} className='font-serif font-medium'>
+      {/* <Typography variant="h4" sx={{ color: '#00acc1', fontWeight: 700, marginBottom: '20px', textAlign: 'center' }} className='font-serif font-medium'>
+        About Us
+      </Typography> */}
+
+      <Typography
+        variant="h2"
+        sx={{
+          color: '#00acc1',
+          fontFamily: 'serif',  // Match font family
+          fontWeight: 'medium',
+          marginBottom: '20px',
+          textAlign: 'center',
+          fontSize: { xs: '2.5rem', md: '3rem' },  // Adjust font size to match
+          marginTop: '20px',  // Optional: add top margin for spacing consistency
+        }}
+      >
         About Us
       </Typography>
 

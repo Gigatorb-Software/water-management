@@ -11,7 +11,7 @@ const adminSidebarMenuItems = [
   },
   {
     id: "products",
-    label: "Products",
+    label: "Add Product",
     path: "/admin/addproduct",
     icon: <FaBoxOpen />,
   },
