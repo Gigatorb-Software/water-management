@@ -25,6 +25,7 @@ import {
 } from "../../services/UserAPIs/User";
 import { apiCreateServices } from "../../services/AdminAPIs/AdminServices";
 import toast from "react-hot-toast";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface FormValues {
   firstName: string;
@@ -161,7 +162,22 @@ const ServiceForm: React.FC = () => {
       toast.error(error?.response?.data?.message);
     }
   };
-
+  const theme = createTheme({
+    components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'transparent',
+            },
+            '&.Mui-focused': {
+              boxShadow: 'none',
+            },
+          },
+        },
+      },
+    },
+  });
   return (
     <Box
       sx={{
@@ -203,6 +219,7 @@ const ServiceForm: React.FC = () => {
 
           {/* Form */}
           {/* <form onSubmit={formik.handleSubmit}> */}
+          <ThemeProvider theme={theme}>
           <form onSubmit={handleFormSubmit} className="mt-4">
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {/* Full Name */}
@@ -321,39 +338,6 @@ const ServiceForm: React.FC = () => {
                     inputProps={{ sx: { fontSize: 12, fontFamily: 'serif' } }}
                   />
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel sx={{ fontSize: 12 }} id="category-label">
-                      Purifier You Own
-                    </InputLabel>
-                    <Select
-                      labelId="category-label"
-                      id="category"
-                      name="category"
-                      value={formik.values.category}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      error={
-                        formik.touched.category &&
-                        Boolean(formik.errors.category)
-                      }
-                      label="Select Category"
-                      sx={{ fontSize: 12 }}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="category1">Category 1</MenuItem>
-                      <MenuItem value="category2">Category 2</MenuItem>
-                      <MenuItem value="category3">Category 3</MenuItem>
-                    </Select>
-                    {formik.touched.category && formik.errors.category && (
-                      <Typography variant="caption" color="error">
-                        {formik.errors.category}
-                      </Typography>
-                    )}
-                  </FormControl>
-                </Grid> */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
@@ -530,6 +514,7 @@ const ServiceForm: React.FC = () => {
               </Box>
             </Box>
           </form>
+          </ThemeProvider>
         </Box>
       </Container>
     </Box>

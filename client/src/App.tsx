@@ -20,6 +20,8 @@ import AddProduct from "./pages/adminView/AddProduct";
 import AdminServices from "./pages/adminView/AdminServices";
 import AddTechnician from "./pages/adminView/AddTechnician";
 import {Toaster} from "react-hot-toast"
+import AdminProductList from "./pages/adminView/AdminProductList";
+import AdminTechnicianList from "./pages/adminView/AdminTechnicianList";
 
 
 function App() {
@@ -43,9 +45,12 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="addproduct" element={<AddProduct />} />
+          <Route path="productlist" element={<AdminProductList />} />
           <Route path="editproduct/:id" element={<AddProduct />} />
           <Route path="services" element={<AdminServices />} />
           <Route path="addTech" element={<AddTechnician />} />
+          <Route path="techList" element={<AdminTechnicianList />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

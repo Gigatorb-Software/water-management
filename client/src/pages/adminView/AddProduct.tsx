@@ -94,7 +94,7 @@ const AddProduct = () => {
 
       }
       // alert(id ? "Product updated successfully!" : "Product added successfully!");
-      navigate("/admin/dashboard");
+      navigate("/admin/productlist");
       toast.success(response.data.message);
 
     } catch (error) {

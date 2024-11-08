@@ -1,146 +1,117 @@
-import { useEffect, useState } from "react";
-import {
-  IconButton,
-  Typography,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
-import { Edit, Delete } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import { apiDeleteProductById, apiGetAllProducts } from "../../services/AdminAPIs/AdminCrud";
-import toast from "react-hot-toast";
-
-type Product = {
-  id: number;
-  productName: string;
-  description: string;
-  category: string;
-  price: string;
-  stockQuantity: number;
-  warrantyPeriod: number;
-  is_active: boolean;
-  image: string;
-};
-
+import React from 'react';
+import { FaBoxOpen, FaHardHat } from 'react-icons/fa';
+import { Icon } from '@iconify/react';
+import { Typography } from '@mui/material';
+ 
 const AdminDashboard = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const navigate = useNavigate();
-
-  const fetchProducts = async () => {
-    try {
-      const response = await apiGetAllProducts();
-      const mappedProducts = response?.data?.products?.map((product : any) => ({
-        id: product.id,
-        productName: product.productName,
-        description: product.description,
-        category: product.category,
-        price: product.price,
-        stockQuantity: product.stockQuantity,
-        warrantyPeriod: product.warrantyPeriod,
-        is_active: product.is_active,
-        image: product.images[0]?.image_url || "",
-      }));
-      setProducts(mappedProducts);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      toast.error(error.response.data.message);
-
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const handleDelete = async (id: number) => {
-    try {
-      await apiDeleteProductById(id);
-      fetchProducts();
-      // alert("Product deleted successfully!");
-      toast.success(response.data.message);
-
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      // alert("Failed to delete product");
-      toast.error(error.response.data.message);
-
-    }
-  };
-
-  const handleEdit = (id: number) => {
-    navigate(`/admin/editproduct/${id}`);
-  };
-
+  const cardData = [
+    {
+      title: 'Maintenance',
+      value: '$16,689',
+      icon: 'mdi:tools',
+      bgColor: 'bg-teal-100',
+      iconBg: 'bg-teal-500',
+    },
+    {
+      title: 'Installation',
+      value: '$148',
+      icon: 'mdi:cog-transfer',
+      bgColor: 'bg-yellow-100',
+      iconBg: 'bg-yellow-500',
+    },
+    {
+      title: 'Repair',
+      value: '$156K',
+      icon: 'mdi:wrench',
+      bgColor: 'bg-pink-100',
+      iconBg: 'bg-pink-500',
+    },
+    {
+      title: 'Exchange',
+      value: '$64',
+      icon: 'mdi:cached',
+      bgColor: 'bg-green-100',
+      iconBg: 'bg-green-500',
+    },
+  ];
+ 
   return (
-    <Box sx={{ maxWidth: 1200, margin: "0 auto", padding: "20px" }}>
-     
-      <TableContainer component={Paper}>
-
+    <div className="space-y-4 px-4 mt-0 sm:px-8">
       <Typography
         variant="h2"
         sx={{
           color: '#00acc1',
           fontFamily: 'serif',
           fontWeight: 'medium',
-          marginBottom: '20px',
-          textAlign: 'center',
           fontSize: { xs: '1.875rem', md: '2.25rem' },
-          marginTop: '20px',
         }}
       >
-        Product Lists
+        Dashboard
       </Typography>
-        <Table sx={{ minWidth: 650 }} aria-label="product table">
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>ID</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Product Name</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Category</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Description</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Price</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Stock Status</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>Image</TableCell>
-              <TableCell sx={{ fontWeight: "600", fontFamily: 'serif'}}>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell sx={{ fontFamily: 'serif' }}>{product.id}</TableCell>
-                <TableCell  sx={{ fontFamily: 'serif' }}>{product.productName}</TableCell>
-                <TableCell  sx={{ fontFamily: 'serif' }}>{product.category}</TableCell>
-                <TableCell  sx={{ fontFamily: 'serif' }}>{product.description}</TableCell>
-                <TableCell  sx={{ fontFamily: 'serif' }}>{product.price}</TableCell>
-                <TableCell  sx={{ fontFamily: 'serif' }}>
-                  {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
-                </TableCell>
-                <TableCell>
-                  <img src={product.image} alt={product.productName} width="50" height="50" />
-                </TableCell>
-                <TableCell>
-                  <IconButton color="success" onClick={() => handleEdit(product.id)}>
-                    <Edit />
-                  </IconButton>
-                  <IconButton color="error" onClick={() => handleDelete(product.id)}>
-                    <Delete />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+ 
+      {/* First Row - Original Three Cards */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="flex items-center bg-white border rounded-md overflow-hidden shadow">
+          <div className="p-4 bg-teal-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider font-serif">Total Users</h3>
+            <p className="text-3xl">12,768</p>
+          </div>
+        </div>
+ 
+        <div className="flex items-center bg-white border rounded-md overflow-hidden shadow">
+          <div className="p-4 bg-yellow-500">
+            <FaBoxOpen className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider font-serif">Total Products</h3>
+            <p className="text-3xl">39,265</p>
+          </div>
+        </div>
+ 
+        <div className="flex items-center bg-white border rounded-md overflow-hidden shadow">
+          <div className="p-4 bg-green-500">
+            <FaHardHat className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider font-serif">Total Technicians</h3>
+            <p className="text-3xl ">142,334</p>
+          </div>
+        </div>
+      </div>
+ 
+      {/* Second Row - Responsive Card Grid */}
+      <div className="container bg-white px-6 rounded-md shadow-md">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-8">
+          {cardData.map((card, index) => (
+            <div
+              key={index}
+              className={`p-6 ${card.bgColor} rounded-lg shadow-lg text-center`}
+            >
+              <div
+                className={`flex items-center justify-center w-12 h-12 ${card.iconBg} rounded-full mx-auto mb-4`}
+              >
+                <Icon icon={card.icon} className="text-white text-2xl" />
+              </div>
+              <h6 className="text-gray-700 font-medium mb-2 font-serif">{card.title}</h6>
+              <h4 className="text-gray-900 font-medium text-xl mb-4">{card.value}</h4>
+              <button className="bg-white hover:bg-gray-100 text-gray-800 font-medium py-1 px-4 rounded shadow-md hover:shadow-lg transition font-serif">
+                View Details
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
-
+ 
 export default AdminDashboard;
+ 
 
 
 

@@ -115,36 +115,36 @@ const AdminService = () => {
       </Typography>
 
   <Table sx={{ minWidth: 650 }} aria-label="admin service table">
-    <TableHead>
-      <TableRow>
-        <TableCell sx={{ fontWeight: "600", fontFamily: 'serif' }}>ID</TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Customer Name
-        </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Service Type
-        </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Booking Date
-        </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Schedule Date
-        </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Technician
-        </TableCell>
-        <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Status
-        </TableCell>
-        
-        <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          PDF
-        </TableCell>
-        <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif' }}>
-          Action
-        </TableCell>
-      </TableRow>
-    </TableHead>
+  <TableHead>
+  <TableRow>
+    <TableCell sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>ID</TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Customer Name
+    </TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Service Type
+    </TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Booking Date
+    </TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Schedule Date
+    </TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Technician
+    </TableCell>
+    <TableCell align="left" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Status
+    </TableCell>
+    <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      PDF
+    </TableCell>
+    <TableCell align="center" sx={{ fontWeight: "600", fontFamily: 'serif', whiteSpace: 'nowrap' }}>
+      Action
+    </TableCell>
+  </TableRow>
+</TableHead>
+
     <TableBody>
       {services.map((service) => (
         <TableRow key={service.id}>
