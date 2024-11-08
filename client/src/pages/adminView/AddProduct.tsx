@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { apiAddProduct, apiGetProductById, apiUpdateProductById } from "../../services/AdminAPIs/AdminCrud";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const { id } = useParams();
@@ -89,13 +90,18 @@ const AddProduct = () => {
         //   }
         // );
         response = await apiAddProduct(formData);
+        
 
       }
-      alert(id ? "Product updated successfully!" : "Product added successfully!");
+      // alert(id ? "Product updated successfully!" : "Product added successfully!");
       navigate("/admin/dashboard");
+      toast.success(response.data.message);
+
     } catch (error) {
       console.error("Error submitting product:", error);
-      alert(id ? "Failed to update product" : "Failed to add product");
+      // alert(id ? "Failed to update product" : "Failed to add product");
+      toast.error(error.response.data.message);
+
     }
   };
 

@@ -19,10 +19,13 @@ import AdminDashboard from "./pages/adminView/AdminDashboard";
 import AddProduct from "./pages/adminView/AddProduct";
 import AdminServices from "./pages/adminView/AdminServices";
 import AddTechnician from "./pages/adminView/AddTechnician";
+import {Toaster} from "react-hot-toast"
+
 
 function App() {
   return (
     <BrowserRouter>
+    <Toaster />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

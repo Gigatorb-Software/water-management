@@ -19,8 +19,12 @@ import {
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import { apiGetUserById, apiServiceFormSubmit } from "../../services/UserAPIs/User";
+import {
+  apiGetUserById,
+  apiServiceFormSubmit,
+} from "../../services/UserAPIs/User";
 import { apiCreateServices } from "../../services/AdminAPIs/AdminServices";
+import toast from "react-hot-toast";
 
 interface FormValues {
   firstName: string;
@@ -138,33 +142,23 @@ const ServiceForm: React.FC = () => {
     const formData = new FormData();
     formData.append("customerId", userId); // Replace `userId` with the actual customer ID
     formData.append("productId", 4);
-    formData.append("serviceType", formik.values.serviceType);
+    formData.append("serviceType", formik?.values?.serviceType);
     formData.append("serviceStatus", "pending");
 
     // Assuming `formik.values.receipt` holds the PDF file
-    const pdfFile = formik.values.receipt;
+    const pdfFile = formik?.values?.receipt;
 
     if (pdfFile) {
       formData.append("receipt", pdfFile); // Attach the PDF file to FormData
     }
 
     try {
-      
-      // const response = await axios.post(
-      //   "http://localhost:3000/api/createService",
-      //   formData,
-      //   {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   }
-      // );
       let response = await apiServiceFormSubmit(formData);
-
       navigate("/");
+      toast.success(response?.data?.message);
     } catch (error) {
       console.error("Error submitting form:", error);
-      // Handle the error (e.g., display an error message)
+      toast.error(error?.response?.data?.message);
     }
   };
 

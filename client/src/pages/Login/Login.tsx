@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { apiSignIn } from "../../services/AuthenticationAPIs/authenticationService";
+import toast from "react-hot-toast";
 
 const Login = () => {
   // Initialize useNavigate
@@ -36,6 +37,8 @@ const Login = () => {
         localStorage.setItem("roleId", res?.data?.roleId);
         localStorage.setItem("userId", res?.data?.userId);
         localStorage.setItem("token", res?.data?.token);
+      toast.success(res.data.message);
+
 
         switch (res?.data?.roleId) {
           case 1:
@@ -50,6 +53,7 @@ const Login = () => {
         }
       } catch (error) {
         console.log("Error:", error);
+        toast.error(error.response.data.message);
       }
     },
   });

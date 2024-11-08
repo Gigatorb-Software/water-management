@@ -17,6 +17,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { useNavigate } from "react-router-dom";
 import { apiGetAllServices } from "../../services/AdminAPIs/AdminServices";
 import { apiGetAllTechnician } from "../../services/AdminAPIs/Technician"; // Assuming this is the API for technicians
+import toast from "react-hot-toast";
 
 type Service = {
   id: string;
@@ -46,6 +47,8 @@ const AdminService = () => {
       setServices(transformedServices);
     } catch (error) {
       console.error("Error fetching services:", error);
+      toast.error(error.response.data.message);
+
     }
   };
 
@@ -59,6 +62,8 @@ const AdminService = () => {
       setTechnicians(technicianNames);
     } catch (error) {
       console.error("Error fetching technicians:", error);
+      toast.error(error.response.data.message);
+
     }
   };
 
@@ -192,8 +197,8 @@ const AdminService = () => {
               size={24}
             />
             ) : (
-              <Typography variant="body2" color="textSecondary"  sx={{ fontFamily: 'serif' }}>
-                No PDF Available
+              <Typography variant="body2" color="textSecondary">
+                No PDF 
               </Typography>
             )}
           </TableCell>

@@ -234,6 +234,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { apiSignUp } from '../../services/AuthenticationAPIs/authenticationService';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -271,13 +272,16 @@ const Signup = () => {
         
       });
 
-      console.log('Response:', response.data);
-     
+      // console.log('Response:', response.data);
         navigate('/login');
+      toast.success(response.data.message);
+
      
     } catch (error) {
       console.error('Error during signup:', error);
-      alert('Signup failed, please try again.');
+      // alert('Signup failed, please try again.');
+      toast.error(error.response.data.message);
+
     }
   };
 

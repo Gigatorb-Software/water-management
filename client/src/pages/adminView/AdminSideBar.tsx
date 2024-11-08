@@ -1,13 +1,15 @@
 import { FaTachometerAlt, FaBoxOpen, FaCheckCircle, FaChartPie } from "react-icons/fa";
+import { MdDashboardCustomize } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import { MdSettings } from "react-icons/md";
 
 const adminSidebarMenuItems = [
   {
     id: "dashboard",
     label: "Dashboard",
     path: "/admin/dashboard",
-    icon: <FaTachometerAlt />,
+    icon: <MdDashboardCustomize />,
   },
   {
     id: "products",
@@ -31,7 +33,7 @@ const adminSidebarMenuItems = [
     id: "addTech",
     label: "Add Technician",
     path: "/admin/addTech",
-    icon: <FaCheckCircle />,
+    icon: <MdSettings />,
   },
 ];
 
@@ -49,7 +51,7 @@ function MenuItems({ setOpen }) {
           }}
           className="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-200 rounded-md "
         >
-          {menuItem.icon}
+         <span className="text-xl"> {menuItem.icon}</span>
           <span>{menuItem.label}</span>
         </div>
       ))}
