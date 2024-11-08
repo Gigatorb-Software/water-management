@@ -50,7 +50,7 @@ const Header = () => {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className="font-serif  text-cyan-600 font-semibold"
+                className="font-serif  text-cyan-600  hover:text-cyan-500 font-semibold"
               >
                 {link.label}
               </Link>
@@ -83,14 +83,14 @@ const Header = () => {
         <div className="hidden md:block">
           {token ? (
             <Button
-              className="bg-cyan-600 mr-2 text-white "
+              className="bg-cyan-600 hover:bg-cyan-500 mr-2 text-white font-serif"
               onClick={handleLogout}
             >
               Logout
             </Button>
           ) : (
             <Link to="/login">
-              <Button className="bg-cyan-600 mr-2 text-white ">Login</Button>
+              <Button className="bg-cyan-600 hover:bg-cyan-500 mr-2 text-white font-serif ">Login</Button>
             </Link>
           )}
         </div>

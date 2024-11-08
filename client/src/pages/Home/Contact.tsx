@@ -47,14 +47,14 @@ const ContactUsForm: React.FC = () => {
         >
           Contact Us
         </Typography>
-      <p className="text-[#666] mb-6">
+      <p className="text-[#666] mb-6 font-serif">
         Have anything we can help you with? Just get in touch with us.
       </p>
       <form>
   {/* Row 1 */}
   <div className="flex flex-wrap md:flex-nowrap justify-between mb-4 gap-6">
     <div className="flex flex-col w-full md:min-w-[48%] mb-4 md:mb-0">
-      <label htmlFor="customerName" className="flex justify-start text-[#666]">
+      <label htmlFor="customerName" className="flex justify-start text-[#666] font-serif">
         *Customer Name
       </label>
       <input
@@ -73,7 +73,7 @@ const ContactUsForm: React.FC = () => {
       )}
     </div>
     <div className="flex flex-col w-full md:min-w-[48%]">
-      <label htmlFor="email" className="flex justify-start text-[#666]">
+      <label htmlFor="email" className="flex justify-start text-[#666] font-serif">
         Email Id
       </label>
       <input
@@ -96,7 +96,7 @@ const ContactUsForm: React.FC = () => {
   {/* Row 2 */}
   <div className="flex flex-wrap md:flex-nowrap justify-between mb-4 gap-6">
     <div className="flex flex-col w-full md:min-w-[48%] mb-4 md:mb-0">
-      <label htmlFor="mobileNo" className="flex justify-start text-[#666]">
+      <label htmlFor="mobileNo" className="flex justify-start text-[#666] font-serif">
         *Mobile No
       </label>
       <input
@@ -115,7 +115,7 @@ const ContactUsForm: React.FC = () => {
       )}
     </div>
     <div className="flex flex-col w-full md:min-w-[48%]">
-      <label htmlFor="pincode" className="flex justify-start text-[#666]">
+      <label htmlFor="pincode" className="flex justify-start text-[#666] font-serif">
         *Pincode
       </label>
       <input
@@ -138,13 +138,13 @@ const ContactUsForm: React.FC = () => {
   {/* Row 3 */}
   <div className="flex flex-wrap md:flex-nowrap justify-between mb-4 gap-6">
     <div className="flex flex-col w-full md:min-w-[48%] mb-4 md:mb-0">
-      <label htmlFor="modelName" className="flex justify-start text-[#666]">
+      <label htmlFor="modelName" className="flex justify-start text-[#666] font-serif">
         *Model Name
       </label>
       <select
         id="modelName"
         name="modelName"
-        className="w-full border border-gray-300 rounded px-2 py-1"
+        className="w-full border border-gray-300 rounded px-2 py-1 font-serif"
         value={formik.values.modelName}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -160,13 +160,13 @@ const ContactUsForm: React.FC = () => {
       )}
     </div>
     <div className="flex flex-col w-full md:min-w-[48%]">
-      <label htmlFor="callType" className="flex justify-start text-[#666]">
+      <label htmlFor="callType" className="flex justify-start text-[#666] font-serif">
         *Call Type
       </label>
       <select
         id="callType"
         name="callType"
-        className="w-full border border-gray-300 rounded px-2 py-1"
+        className="w-full border border-gray-300 rounded px-2 py-1 font-serif"
         value={formik.values.callType}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -185,7 +185,7 @@ const ContactUsForm: React.FC = () => {
 
   {/* Full Width Textarea */}
   <div className="flex flex-col mb-4">
-    <label htmlFor="message" className="flex justify-start text-[#666]">
+    <label htmlFor="message" className="flex justify-start text-[#666] font-serif">
       *Message
     </label>
     <textarea
@@ -207,7 +207,7 @@ const ContactUsForm: React.FC = () => {
   {/* Submit Button */}
   <button
     type="submit"
-    className="mt-1 px-8 py-2  rounded-md bg-[#00acc1] text-white text-lg hover:bg-[#00acc1]"
+    className="mt-1 px-8 py-2  rounded-md bg-cyan-600 text-white text-lg hover:bg-[#00acc1] font-serif"
   >
     Submit
   </button>
