@@ -46,6 +46,7 @@ app.use("/api", technicianRoutes);
 app.use("/api", serviceRoutes);
 app.use("/pub", publicRoutes);
 app.use("/admin", adminRoutes);
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // app.use('/api', apiMiddleware, apiRoutes);
 // app.use('/api/admin', apiMiddleware, adminMiddleware, adminRoutes);

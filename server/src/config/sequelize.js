@@ -3,6 +3,7 @@ const Sequelize = require("sequelize");
 const config = require("./config"); // Import config.js file
 
 const env = process.env.NODE_ENV || "development"; // Defaults to 'development'
+
 const dbConfig = config[env]; // Select the config based on environment
 
 const sequelize = new Sequelize(
@@ -16,6 +17,7 @@ const sequelize = new Sequelize(
     logging: false, // Optional: set to `console.log` to enable SQL logging
   }
 );
+
 
 const connectToDatabase = async () => {
   try {
