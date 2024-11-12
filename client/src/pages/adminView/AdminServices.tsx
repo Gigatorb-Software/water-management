@@ -36,23 +36,48 @@ const AdminService = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [technicians, setTechnicians] = useState<string[]>([]);
 
+  // const fetchServices = async () => {
+  //   try {
+  //     const response = await apiGetAllServices();
+  //     const transformedServices = response.data.data.map((service: any) => ({
+  //       ...service,
+  //       customerName: `${service.User.firstName} ${service.User.lastName}`,
+  //       bookingDate: new Date(service.bookingDate).toLocaleDateString("en-GB"),
+  //     }));
+
+  //     setServices(transformedServices);
+  //   } catch (error) {
+  //     console.error("Error fetching services:", error);
+  //     toast.error(error.response.data.message);
+
+  //   }
+  // };
+
+
   const fetchServices = async () => {
     try {
-      const response = await apiGetAllServices();
-      const transformedServices = response.data.data.map((service: any) => ({
-        ...service,
-        customerName: `${service.User.firstName} ${service.User.lastName}`,
-        bookingDate: new Date(service.bookingDate).toLocaleDateString("en-GB"),
-      }));
-
-      setServices(transformedServices);
+      // First, load the services from localStorage
+      const storedServices = JSON.parse(localStorage.getItem('services') || '[]');
+      
+      if (storedServices.length > 0) {
+        setServices(storedServices);
+      } else {
+        // Fetch from the backend if localStorage is empty
+        const response = await apiGetAllServices();
+        const transformedServices = response.data.data.map((service: any) => ({
+          ...service,
+          customerName: `${service.User.firstName} ${service.User.lastName}`,
+          bookingDate: new Date(service.bookingDate).toLocaleDateString("en-GB"),
+        }));
+        
+        setServices(transformedServices);
+      }
     } catch (error) {
       console.error("Error fetching services:", error);
       toast.error(error.response.data.message);
-
     }
   };
-
+  
   console.log('services', services )
 
   const fetchTechnicians = async () => {
@@ -119,10 +144,20 @@ const AdminService = () => {
     }
   };
 
-  const handleApprove = (id: string, payload: any) => {
-     updateServiceStatus(id, payload);
-  };
+  // const handleApprove = (id: string, payload: any) => {
+  //    updateServiceStatus(id, payload);
+  // };
 
+  const handleApprove = (id: string, payload: any) => {
+    updateServiceStatus(id, payload);
+    
+    // Save the updated service in localStorage
+    const updatedServices = services.map(service => 
+      service.id === id ? { ...service, ...payload } : service
+    );
+    localStorage.setItem('services', JSON.stringify(updatedServices));
+  };
+  
  
 return (
     <>
@@ -234,11 +269,11 @@ return (
             <Button
               variant="contained"
               onClick={() => handleApprove(service.id, service)}
-              disabled={service.serviceStatus === "Confirmed"}
+               disabled={service.serviceStatus === "confirmed"}
               className="!bg-cyan-600 !hover:bg-cyan-500 text-white rounded px-4 py-2"
               sx={{ fontFamily: 'serif' }}
             >
-              Approve
+              {service.serviceStatus === "confirmed" ? 'APPROVED' : 'APPROVE'}
             </Button>
           </TableCell>
           
