@@ -15,16 +15,17 @@ import {
 } from "@mui/material";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { useNavigate } from "react-router-dom";
-import { apiGetAllServices } from "../../services/AdminAPIs/AdminServices";
+import { apiGetAllServices, apiUpdateServiceStatus } from "../../services/AdminAPIs/AdminServices";
 import { apiGetAllTechnician } from "../../services/AdminAPIs/Technician"; // Assuming this is the API for technicians
 import toast from "react-hot-toast";
 
 type Service = {
+  payload(id: string, payload: any): void;
   id: string;
   customerName: string;
   serviceType: string;
   bookingDate: string;
-  scheduleDate: string;
+  scheduledDate: string;
   technician: string;
   serviceStatus: string;
   receipt: string | null;
@@ -51,6 +52,8 @@ const AdminService = () => {
 
     }
   };
+
+  console.log('services', services )
 
   const fetchTechnicians = async () => {
     try {
@@ -83,20 +86,45 @@ const AdminService = () => {
   const handleScheduleDateChange = (id: string, newDate: string) => {
     setServices((prev) =>
       prev.map((service) =>
-        service.id === id ? { ...service, scheduleDate: newDate } : service
+        service.id === id ? { ...service, scheduledDate: newDate } : service
       )
     );
   };
 
-  const handleApprove = (id: string) => {
-    setServices((prev) =>
-      prev.map((service) =>
-        service.id === id ? { ...service, status: "Confirmed" } : service
-      )
-    );
+  const updateServiceStatus = async (id: string, services: any) => {
+    try {
+     
+      const payload = {
+        scheduledDate : services.scheduledDate,
+            serviceStatus : "confirmed",
+            technicianId : services.technicianId
+    }
+      const response = await apiUpdateServiceStatus(id, payload);
+      if (response.status === 200) {
+        const updatedService = response.data.data;
+        toast.success(response.data.message);
+        
+        setServices((prev) =>
+          prev.map((service) =>
+            service.id === id
+              ? { ...service, serviceStatus: 'confirmed' }
+              : service
+          )
+        );
+        
+      }
+    } catch (error) {
+      console.error("Error updating service status:", error);
+      toast.error("Failed to update status");
+    }
   };
 
-  return (
+  const handleApprove = (id: string, payload: any) => {
+     updateServiceStatus(id, payload);
+  };
+
+ 
+return (
     <>
    <TableContainer component={Paper} className="my-4">
  <Typography
@@ -155,7 +183,7 @@ const AdminService = () => {
           <TableCell  sx={{ fontFamily: 'serif' }}>
             <TextField
               type="date"
-              value={service.scheduleDate || ""}
+              value={service.scheduledDate || ""}
               onChange={(e) =>
                 handleScheduleDateChange(service.id, e.target.value)
               }
@@ -205,7 +233,7 @@ const AdminService = () => {
           <TableCell align="center">
             <Button
               variant="contained"
-              onClick={() => handleApprove(service.id)}
+              onClick={() => handleApprove(service.id, service)}
               disabled={service.serviceStatus === "Confirmed"}
               className="!bg-cyan-600 !hover:bg-cyan-500 text-white rounded px-4 py-2"
               sx={{ fontFamily: 'serif' }}

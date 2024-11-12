@@ -16,3 +16,12 @@ export async function apiCreateServices(data: any) {
     })
 }
 
+
+export async function apiUpdateServiceStatus(id: any, data : any) {
+
+    return MainAPIService.fetchData<any>({
+      url: `/api/updateService/${id}`,
+      method: 'put',
+      data,
+     });
+}
