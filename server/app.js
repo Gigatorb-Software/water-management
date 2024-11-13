@@ -22,7 +22,8 @@ app.use(
     extended: true,
   })
 );
-const allowedOrigins = ["http://localhost:5173"] || "*";
+const allowedOrigins =
+  ["http://localhost:5173", "https://water-management-2092f.web.app"] || "*";
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
