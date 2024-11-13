@@ -118,13 +118,35 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          <li>
+          {/* <li>
             <Link to="/login" onClick={toggleMenu}>
               <Button className="bg-cyan-600 hover:bg-cyan-500 w-full text-white ">
                 LogOut
               </Button>
             </Link>
+          </li> */}
+
+
+<li>
+            {token ? (
+              <Button
+                className="bg-cyan-600 hover:bg-cyan-500 w-full text-white"
+                onClick={() => {
+                  handleLogout();
+                  toggleMenu();
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Link to="/login" onClick={toggleMenu}>
+                <Button className="bg-cyan-600 hover:bg-cyan-500 w-full text-white">
+                  Login
+                </Button>
+              </Link>
+            )}
           </li>
+          
         </ul>
       </nav>
     </header>
